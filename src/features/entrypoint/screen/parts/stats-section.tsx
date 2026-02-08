@@ -210,31 +210,31 @@ export function StatsSection({ isActive }: StatsSectionProps) {
     >
       <div className="flex w-full max-w-6xl flex-col items-center">
         {/* Header */}
-        <div className="st-badge inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-4 py-1.5">
+        <div className="st-badge inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-3 py-1.5 sm:px-4">
           <div className="h-2 w-2 animate-pulse rounded-full bg-primary" />
-          <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-primary">
+          <span className="text-[9px] font-bold uppercase tracking-[0.2em] text-primary sm:text-[10px] sm:tracking-[0.3em]">
             Key Capabilities
           </span>
         </div>
-        <h2 className="st-title mt-4 text-center text-3xl font-black uppercase tracking-tight text-text-white md:text-5xl lg:text-6xl">
+        <h2 className="st-title mt-3 text-center text-2xl font-black uppercase tracking-tight text-text-white sm:mt-4 sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl">
           Built For <span className="text-primary">Simplicity</span>
         </h2>
-        <p className="st-subtitle mt-3 max-w-lg text-center text-[10px] font-medium uppercase tracking-widest text-text-secondary">
+        <p className="st-subtitle mt-2 max-w-lg px-4 text-center text-[9px] font-medium uppercase tracking-widest text-text-secondary sm:mt-3 sm:text-[10px]">
           Straightforward endpoint monitoring without unnecessary complexity.
         </p>
 
         {/* Big stats */}
-        <div className="mt-10 grid w-full grid-cols-2 gap-4 md:grid-cols-4 md:gap-6">
+        <div className="mt-8 grid w-full grid-cols-2 gap-3 sm:mt-10 sm:gap-4 md:grid-cols-4 md:gap-6">
           {STATS.map((stat) => (
             <div
               key={stat.label}
-              className="st-stat flex flex-col items-center justify-center py-6"
+              className="st-stat flex flex-col items-center justify-center py-4 sm:py-6"
             >
-              <stat.icon className="h-8 w-8 text-primary md:h-10 md:w-10" />
-              <span className="mt-3 text-3xl font-black text-primary md:text-5xl">
+              <stat.icon className="h-7 w-7 text-primary sm:h-8 sm:w-8 md:h-10 md:w-10" />
+              <span className="mt-2 text-2xl font-black text-primary sm:mt-3 sm:text-3xl md:text-4xl lg:text-5xl">
                 {stat.value}
               </span>
-              <span className="mt-1 text-[9px] font-bold uppercase tracking-widest text-text-secondary">
+              <span className="mt-1 text-[8px] font-bold uppercase tracking-widest text-text-secondary sm:text-[9px]">
                 {stat.label}
               </span>
             </div>
@@ -242,19 +242,19 @@ export function StatsSection({ isActive }: StatsSectionProps) {
         </div>
 
         {/* Scrolling ticker */}
-        <div className="st-ticker mt-6 w-full overflow-hidden">
+        <div className="st-ticker mt-4 w-full overflow-hidden sm:mt-6">
           <div className="animate-scroll-x flex whitespace-nowrap">
-            <span className="inline-block pr-8 font-mono text-[10px] tracking-wider text-primary/50">
+            <span className="inline-block pr-6 font-mono text-[9px] tracking-wider text-primary/50 sm:pr-8 sm:text-[10px]">
               {tickerText}
             </span>
-            <span className="inline-block pr-8 font-mono text-[10px] tracking-wider text-primary/50">
+            <span className="inline-block pr-6 font-mono text-[9px] tracking-wider text-primary/50 sm:pr-8 sm:text-[10px]">
               {tickerText}
             </span>
           </div>
         </div>
 
         {/* Bottom cards */}
-        <div className="mt-6 flex w-full flex-col gap-4 md:flex-row">
+        <div className="mt-4 flex w-full flex-col gap-3 sm:mt-6 sm:gap-4 md:flex-row">
           <div className="st-card flex-[2]">
             <LatencyPulseCard />
           </div>
