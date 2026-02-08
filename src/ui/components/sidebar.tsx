@@ -29,15 +29,18 @@ function SidebarLink({
   label,
   isActive,
   children,
+  onClick,
 }: {
   to: string
   label: string
   isActive?: boolean
   children: React.ReactNode
+  onClick?: () => void
 }) {
   return (
     <Link
       to={to}
+      onClick={onClick}
       className={`group relative flex h-10 w-10 items-center justify-center rounded-lg transition-colors ${
         isActive
           ? 'bg-primary/10 text-primary'
@@ -52,11 +55,11 @@ function SidebarLink({
   )
 }
 
-export function Sidebar() {
+function SidebarContent({ onLinkClick }: { onLinkClick?: () => void }) {
   const location = useLocation()
 
   return (
-    <aside className="hidden w-14 flex-shrink-0 flex-col items-center border-r border-border-light bg-bg-primary py-4 md:flex">
+    <>
       <nav className="flex flex-1 flex-col items-center gap-2">
         {NAV_ITEMS.map((item) => {
           const isActive = location.pathname.startsWith(item.path) && item.path !== '#'
@@ -66,6 +69,7 @@ export function Sidebar() {
               to={item.path}
               label={item.label}
               isActive={isActive}
+              onClick={onLinkClick}
             >
               <item.icon className="h-5 w-5" />
             </SidebarLink>
@@ -73,9 +77,25 @@ export function Sidebar() {
         })}
       </nav>
 
-      <SidebarLink to="#" label="Settings">
+      <SidebarLink to="#" label="Settings" onClick={onLinkClick}>
         <Settings className="h-5 w-5" />
       </SidebarLink>
+    </>
+  )
+}
+
+export function Sidebar() {
+  return (
+    <aside className="hidden w-14 shrink-0 flex-col items-center border-r border-border-light bg-bg-primary py-4 md:flex">
+      <SidebarContent />
+    </aside>
+  )
+}
+
+export function MobileSidebar({ onClose }: { onClose: () => void }) {
+  return (
+    <aside className="flex h-full w-14 flex-col items-center border-r border-border-light bg-bg-primary py-4">
+      <SidebarContent onLinkClick={onClose} />
     </aside>
   )
 }

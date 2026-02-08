@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Outlet } from 'react-router-dom'
 import { useDashboardOverview } from '@features/dashboard/api/use-dashboard-overview.ts'
-import { Sidebar } from './sidebar.tsx'
+import { Sidebar, MobileSidebar } from './sidebar.tsx'
 import { TopBar } from './top-bar.tsx'
 import { StatusFooter } from './status-footer.tsx'
 
@@ -25,9 +25,9 @@ export function AppLayout() {
               className="absolute inset-0 bg-black/50"
               onClick={() => setSidebarOpen(false)}
             />
-            <aside className="relative z-50 flex h-full w-14 flex-col items-center border-r border-border-light bg-bg-primary py-4">
-              <Sidebar />
-            </aside>
+            <div className="relative z-50">
+              <MobileSidebar onClose={() => setSidebarOpen(false)} />
+            </div>
           </div>
         )}
 
