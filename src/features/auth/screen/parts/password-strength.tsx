@@ -42,11 +42,11 @@ export function PasswordStrength({ password }: PasswordStrengthProps) {
               {req.passed ? (
                 <CheckCircle className="h-3.5 w-3.5 flex-shrink-0 text-primary" />
               ) : (
-                <Circle className="h-3.5 w-3.5 flex-shrink-0 text-text-muted" />
+                <Circle className="h-3.5 w-3.5 flex-shrink-0 text-text-secondary" />
               )}
               <span
                 className={`text-[11px] uppercase tracking-wider ${
-                  req.passed ? 'text-primary' : 'text-text-muted'
+                  req.passed ? 'text-primary' : 'text-text-secondary'
                 }`}
               >
                 {req.label}

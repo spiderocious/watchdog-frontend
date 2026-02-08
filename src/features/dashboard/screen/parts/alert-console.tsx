@@ -59,7 +59,7 @@ export function AlertConsole({ errorLogs, services }: AlertConsoleProps) {
                   <span className="text-[10px] font-bold uppercase tracking-wider text-status-error">
                     {getServiceName(log.node_id, services)}
                   </span>
-                  <span className="shrink-0 font-mono text-[9px] tracking-wider text-text-muted">
+                  <span className="shrink-0 font-mono text-[9px] tracking-wider text-text-secondary">
                     {formatTimestamp(log.created_at)}
                   </span>
                 </div>

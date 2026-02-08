@@ -18,10 +18,10 @@ import { useRegisterMutation } from '../../api/use-register-mutation.ts'
 import { PasswordStrength } from './password-strength.tsx'
 
 const INPUT_BASE =
-  'w-full rounded-lg border bg-bg-primary py-3.5 pl-11 pr-4 text-sm text-text-primary placeholder:text-text-muted transition-colors focus:outline-none'
+  'w-full rounded-lg border bg-bg-primary py-3.5 pl-11 pr-4 text-sm text-text-primary placeholder:text-text-secondary transition-colors focus:outline-none'
 const INPUT_NORMAL = `${INPUT_BASE} border-border-light focus:border-primary focus:ring-1 focus:ring-primary/20`
 const INPUT_ERROR = `${INPUT_BASE} border-status-error focus:border-status-error focus:ring-1 focus:ring-status-error/20`
-const ICON_LEFT = 'absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-text-muted'
+const ICON_LEFT = 'absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-text-secondary'
 
 export function RegistrationForm() {
   const navigate = useNavigate()
@@ -184,7 +184,7 @@ export function RegistrationForm() {
             <button
               type="button"
               onClick={() => setShowPassword((v) => !v)}
-              className="absolute right-3.5 top-1/2 -translate-y-1/2 text-text-muted transition-colors hover:text-text-secondary"
+              className="absolute right-3.5 top-1/2 -translate-y-1/2 text-text-secondary transition-colors hover:text-text-secondary"
             >
               {showPassword ? (
                 <EyeOff className="h-4 w-4" />
@@ -223,7 +223,7 @@ export function RegistrationForm() {
               <button
                 type="button"
                 onClick={() => setShowConfirmPassword((v) => !v)}
-                className="absolute right-3.5 top-1/2 -translate-y-1/2 text-text-muted transition-colors hover:text-text-secondary"
+                className="absolute right-3.5 top-1/2 -translate-y-1/2 text-text-secondary transition-colors hover:text-text-secondary"
               >
                 {showConfirmPassword ? (
                   <EyeOff className="h-4 w-4" />
