@@ -72,3 +72,47 @@ export type PauseResumeResponse = {
   paused_at?: string
   resumed_at?: string
 }
+
+// Service Detail types
+
+export type ServiceInfo = {
+  id: string
+  name: string
+  endpoint: string
+  method: string
+  status: ServiceStatus
+  check_interval: number
+  failure_threshold: number
+  created_at: string
+}
+
+export type QuickMetrics = {
+  status: ServiceStatus
+  uptime_30d: number
+  avg_response: number
+  errors_7d: number
+}
+
+export type ResponseTimePoint = {
+  time: string
+  value: number
+}
+
+export type HealthCheckEntry = {
+  id: string
+  node_id: string
+  status_code: number
+  status_text: string
+  response_time: number
+  success: boolean
+  error_message: string
+  created_at: string
+}
+
+export type ServiceDetailData = {
+  service: ServiceInfo
+  quick_metrics: QuickMetrics
+  response_time_history: ResponseTimePoint[]
+  health_check_log: HealthCheckEntry[]
+  errors: HealthCheckEntry[]
+}
