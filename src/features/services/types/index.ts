@@ -61,6 +61,41 @@ export type CreateServiceResponse = {
   created_at: string
 }
 
+export type TestConnectionPayload = {
+  endpoint_url: string
+  method?: string
+  headers?: Record<string, string>
+  body?: string
+}
+
+export type TestConnectionResponse = {
+  status_code: number
+  status_text: string
+  response_time: number
+  response_time_unit: string
+  content_size: number
+  content_size_unit: string
+  connection_established: boolean
+}
+
+export type HeaderEntry = {
+  key: string
+  value: string
+}
+
+export type ServiceFormData = {
+  service_name: string
+  endpoint_url: string
+  method: string
+  headers: HeaderEntry[]
+  body: string
+  check_interval: number
+  request_timeout: number
+  failure_threshold: number
+  expected_status_codes: number[]
+  ssl_verify: boolean
+}
+
 export type DeleteServiceResponse = {
   service_id: string
   deleted_at: string

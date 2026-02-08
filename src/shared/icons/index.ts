@@ -1,6 +1,7 @@
 export {
   Activity,
   AlertTriangle,
+  ArrowLeft,
   ArrowRight,
   AtSign,
   Bell,
@@ -36,7 +37,9 @@ export {
   Settings,
   Shield,
   ShieldCheck,
+  Sliders,
   Trash2,
+  Upload,
   User,
   X,
   Zap,
