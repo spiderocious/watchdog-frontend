@@ -7,6 +7,7 @@ type DetailHeaderProps = {
   service: ServiceInfo
   onPause: () => void
   onResume: () => void
+  onEdit: () => void
   onDelete: () => void
 }
 
@@ -17,7 +18,7 @@ const STATUS_LABEL: Record<string, { text: string; color: string }> = {
   paused: { text: 'PAUSED', color: 'text-text-secondary' },
 }
 
-export function DetailHeader({ service, onPause, onResume, onDelete }: DetailHeaderProps) {
+export function DetailHeader({ service, onPause, onResume, onEdit, onDelete }: DetailHeaderProps) {
   const status = STATUS_LABEL[service.status] ?? STATUS_LABEL.active
 
   return (
@@ -77,6 +78,7 @@ export function DetailHeader({ service, onPause, onResume, onDelete }: DetailHea
 
           <button
             type="button"
+            onClick={onEdit}
             className="flex items-center gap-1.5 rounded-md border border-primary/40 bg-primary/10 px-4 py-2 text-[10px] font-bold uppercase tracking-wider text-primary transition-colors hover:bg-primary/20"
           >
             <Edit3 className="h-3.5 w-3.5" />

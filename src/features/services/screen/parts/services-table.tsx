@@ -258,6 +258,7 @@ export function ServicesTable({ items, onPause, onResume, onDelete }: ServicesTa
                     </button>
                     <button
                       type="button"
+                      onClick={() => navigate(`/services/${service.id}/edit`)}
                       className="flex h-7 w-7 items-center justify-center rounded text-text-tertiary transition-colors hover:bg-bg-tertiary hover:text-text-secondary"
                     >
                       <Edit3 className="h-4 w-4" />

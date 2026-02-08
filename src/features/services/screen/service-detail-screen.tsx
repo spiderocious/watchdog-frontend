@@ -45,6 +45,11 @@ export function ServiceDetailScreen() {
     resumeMutation.mutate(service_id)
   }
 
+  function handleEdit() {
+    if (!service_id) return
+    navigate(`/services/${service_id}/edit`)
+  }
+
   return (
     <div className="flex flex-1 flex-col gap-6 overflow-y-auto p-4">
       <Show when={isLoading}>
@@ -71,6 +76,7 @@ export function ServiceDetailScreen() {
                 service={data.service}
                 onPause={handlePause}
                 onResume={handleResume}
+                onEdit={handleEdit}
                 onDelete={() => setDeleteConfirmOpen(true)}
               />
 
