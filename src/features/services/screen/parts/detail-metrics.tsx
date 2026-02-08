@@ -1,4 +1,4 @@
-import { CheckCircle, Shield, Zap, AlertTriangle } from '@icons/index.ts'
+import { CheckCircle, AlertTriangle } from '@icons/index.ts'
 import type { QuickMetrics } from '../../types/index.ts'
 
 type DetailMetricsProps = {

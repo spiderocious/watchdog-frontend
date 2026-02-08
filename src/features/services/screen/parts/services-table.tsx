@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { Show } from 'meemaw'
 import { Eye, Edit3, MoreVertical, Pause, Play, Trash2 } from '@icons/index.ts'
 import type { ServiceItem } from '../../types/index.ts'
@@ -14,7 +15,7 @@ const STATUS_CONFIG: Record<string, { label: string; color: string; dot: string 
   active: { label: 'ACTIVE', color: 'text-status-success', dot: 'bg-status-success' },
   down: { label: 'DOWN', color: 'text-status-error', dot: 'bg-status-error' },
   warning: { label: 'LATENCY WARNING', color: 'text-status-warning', dot: 'bg-status-warning' },
-  paused: { label: 'PAUSED', color: 'text-text-muted', dot: 'bg-text-muted' },
+  paused: { label: 'PAUSED', color: 'text-text-secondary', dot: 'bg-text-muted' },
 }
 
 const METHOD_COLOR: Record<string, string> = {
@@ -49,7 +50,7 @@ function getUptimeBarColor(pct: number): string {
 }
 
 function getResponseColor(ms: number): string {
-  if (ms === 0) return 'text-text-muted'
+  if (ms === 0) return 'text-text-secondary'
   if (ms > 1000) return 'text-status-error'
   if (ms > 500) return 'text-status-warning'
   return 'text-status-success'
@@ -119,36 +120,38 @@ function ActionsMenu({
 }
 
 export function ServicesTable({ items, onPause, onResume, onDelete }: ServicesTableProps) {
+  const navigate = useNavigate()
+
   return (
     <div className="overflow-x-auto rounded-lg border border-border-light bg-bg-secondary">
       <table className="w-full text-left">
         <thead>
           <tr className="border-b border-border-light">
-            <th className="px-4 py-3 text-[9px] font-bold uppercase tracking-wider text-text-muted">
+            <th className="px-4 py-3 text-[9px] font-bold uppercase tracking-wider text-text-secondary">
               Status
             </th>
-            <th className="px-4 py-3 text-[9px] font-bold uppercase tracking-wider text-text-muted">
+            <th className="px-4 py-3 text-[9px] font-bold uppercase tracking-wider text-text-secondary">
               Service Name
             </th>
-            <th className="hidden px-4 py-3 text-[9px] font-bold uppercase tracking-wider text-text-muted md:table-cell">
+            <th className="hidden px-4 py-3 text-[9px] font-bold uppercase tracking-wider text-text-secondary md:table-cell">
               Endpoint
             </th>
-            <th className="hidden px-4 py-3 text-[9px] font-bold uppercase tracking-wider text-text-muted sm:table-cell">
+            <th className="hidden px-4 py-3 text-[9px] font-bold uppercase tracking-wider text-text-secondary sm:table-cell">
               Method
             </th>
-            <th className="hidden px-4 py-3 text-[9px] font-bold uppercase tracking-wider text-text-muted sm:table-cell">
+            <th className="hidden px-4 py-3 text-[9px] font-bold uppercase tracking-wider text-text-secondary sm:table-cell">
               Interval
             </th>
-            <th className="px-4 py-3 text-[9px] font-bold uppercase tracking-wider text-text-muted">
+            <th className="px-4 py-3 text-[9px] font-bold uppercase tracking-wider text-text-secondary">
               Uptime
             </th>
-            <th className="hidden px-4 py-3 text-[9px] font-bold uppercase tracking-wider text-text-muted lg:table-cell">
+            <th className="hidden px-4 py-3 text-[9px] font-bold uppercase tracking-wider text-text-secondary lg:table-cell">
               Avg Resp
             </th>
-            <th className="hidden px-4 py-3 text-[9px] font-bold uppercase tracking-wider text-text-muted lg:table-cell">
+            <th className="hidden px-4 py-3 text-[9px] font-bold uppercase tracking-wider text-text-secondary lg:table-cell">
               Last Check
             </th>
-            <th className="px-4 py-3 text-[9px] font-bold uppercase tracking-wider text-text-muted">
+            <th className="px-4 py-3 text-[9px] font-bold uppercase tracking-wider text-text-secondary">
               Actions
             </th>
           </tr>
@@ -156,12 +159,13 @@ export function ServicesTable({ items, onPause, onResume, onDelete }: ServicesTa
         <tbody>
           {items.map((service) => {
             const status = STATUS_CONFIG[service.status] ?? STATUS_CONFIG.active
-            const methodColor = METHOD_COLOR[service.method.toUpperCase()] ?? 'border-text-muted text-text-muted'
+            const methodColor = METHOD_COLOR[service.method.toUpperCase()] ?? 'border-text-muted text-text-secondary'
 
             return (
               <tr
                 key={service.id}
-                className="border-b border-border-light/50 transition-colors last:border-0 hover:bg-bg-tertiary/30"
+                onClick={() => navigate(`/services/${service.id}`)}
+                className="cursor-pointer border-b border-border-light/50 transition-colors last:border-0 hover:bg-bg-tertiary/30"
               >
                 {/* Status */}
                 <td className="px-4 py-3">
@@ -182,7 +186,7 @@ export function ServicesTable({ items, onPause, onResume, onDelete }: ServicesTa
 
                 {/* Endpoint */}
                 <td className="hidden px-4 py-3 md:table-cell">
-                  <span className="font-mono text-[11px] tracking-wider text-text-muted">
+                  <span className="font-mono text-[11px] tracking-wider text-text-secondary">
                     {service.endpoint}
                   </span>
                 </td>
@@ -225,16 +229,17 @@ export function ServicesTable({ items, onPause, onResume, onDelete }: ServicesTa
 
                 {/* Last Check */}
                 <td className="hidden px-4 py-3 lg:table-cell">
-                  <span className="font-mono text-[11px] tracking-wider text-text-muted">
+                  <span className="font-mono text-[11px] tracking-wider text-text-secondary">
                     {formatLastCheck(service.last_check)}
                   </span>
                 </td>
 
                 {/* Actions */}
-                <td className="px-4 py-3">
+                <td className="px-4 py-3" onClick={(e) => e.stopPropagation()}>
                   <div className="flex items-center gap-1">
                     <button
                       type="button"
+                      onClick={() => navigate(`/services/${service.id}`)}
                       className="flex h-7 w-7 items-center justify-center rounded text-text-tertiary transition-colors hover:bg-bg-tertiary hover:text-text-secondary"
                     >
                       <Eye className="h-4 w-4" />
