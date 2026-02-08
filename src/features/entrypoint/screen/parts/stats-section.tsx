@@ -10,21 +10,21 @@ type StatItem = {
 }
 
 const STATS: StatItem[] = [
-  { icon: Activity, value: '2.4 B+', label: 'Health Checks' },
+  { icon: Activity, value: '30s', label: 'Check Interval' },
   { icon: Zap, value: '142 ms', label: 'Avg Response' },
-  { icon: CheckCircle, value: '99.98 %', label: 'Platform Uptime' },
-  { icon: Sparkles, value: '1.2 M+', label: 'Services Active' },
+  { icon: CheckCircle, value: '99.2 %', label: 'Uptime Tracked' },
+  { icon: Sparkles, value: 'HTTP', label: 'Protocol Support' },
 ]
 
 const TICKER_ITEMS = [
-  '// SECURE LINK ESTABLISHED ... OK',
-  '// DATA PACKET LOSS: 0.00804%',
-  '// ACTIVE NODES: 4,821',
-  '// REGION: US-EAST-1 ... OPERATIONAL',
-  '// ENCRYPTION: AES-256-GCM',
-  '// UPLINK STABLE',
-  '// HEARTBEAT SYNC: 12ms',
-  '// CLUSTER: PRIMARY-ACTIVE',
+  '// MONITOR CENTRAL v1.0',
+  '// HTTP/HTTPS MONITORING',
+  '// SIMPLE UPTIME TRACKING',
+  '// RESPONSE TIME METRICS',
+  '// HEALTH CHECK LOGS',
+  '// REST API ACCESS',
+  '// OPEN SOURCE',
+  '// SELF HOSTED',
 ]
 
 function LatencyPulseCard() {
@@ -109,26 +109,26 @@ function LatencyPulseCard() {
   )
 }
 
-function EncryptionCard() {
+function ConfigurationCard() {
   return (
     <div className="flex flex-1 flex-col rounded-xl border border-primary/15 bg-bg-secondary p-4">
       <Shield className="h-5 w-5 text-primary" />
       <span className="mt-3 text-[10px] font-bold uppercase tracking-widest text-text-white">
-        Encryption
+        Configurable
       </span>
-      <span className="mt-1 text-lg font-black text-primary">STABLE</span>
+      <span className="mt-1 text-lg font-black text-primary">100%</span>
     </div>
   )
 }
 
-function ClustersCard() {
+function ServicesCard() {
   return (
     <div className="flex flex-1 flex-col rounded-xl border border-primary/15 bg-bg-secondary p-4">
       <Database className="h-5 w-5 text-status-info" />
       <span className="mt-3 text-[10px] font-bold uppercase tracking-widest text-text-white">
-        Clusters
+        Services
       </span>
-      <span className="mt-1 text-lg font-black text-status-info">ACTIVE [12]</span>
+      <span className="mt-1 text-lg font-black text-status-info">MONITORED</span>
     </div>
   )
 }
@@ -213,14 +213,14 @@ export function StatsSection({ isActive }: StatsSectionProps) {
         <div className="st-badge inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-4 py-1.5">
           <div className="h-2 w-2 animate-pulse rounded-full bg-primary" />
           <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-primary">
-            Live Infrastructure Telemetry
+            Key Capabilities
           </span>
         </div>
         <h2 className="st-title mt-4 text-center text-3xl font-black uppercase tracking-tight text-text-white md:text-5xl lg:text-6xl">
-          System <span className="text-primary">Vitality</span> Matrix
+          Built For <span className="text-primary">Simplicity</span>
         </h2>
         <p className="st-subtitle mt-3 max-w-lg text-center text-[10px] font-medium uppercase tracking-widest text-text-secondary">
-          Cross-referenced global monitoring nodes processing real-time operational datasets.
+          Straightforward endpoint monitoring without unnecessary complexity.
         </p>
 
         {/* Big stats */}
@@ -259,10 +259,10 @@ export function StatsSection({ isActive }: StatsSectionProps) {
             <LatencyPulseCard />
           </div>
           <div className="st-card flex-1">
-            <EncryptionCard />
+            <ConfigurationCard />
           </div>
           <div className="st-card flex-1">
-            <ClustersCard />
+            <ServicesCard />
           </div>
         </div>
       </div>

@@ -12,27 +12,27 @@ type FaqItem = {
 
 const FAQ_ITEMS: FaqItem[] = [
   {
-    question: 'What is the latency of the monitoring agent?',
+    question: 'What protocols can I monitor?',
     answer:
-      'Our agent operates with sub-10ms latency using a lightweight Rust-based collector that pushes metrics via gRPC to our central ingestion engine. It utilizes an eBPF-powered instrumentation layer for zero-overhead syscall monitoring.',
+      'Monitor Central supports HTTP and HTTPS endpoints. You can configure GET, POST, PUT, DELETE, and other HTTP methods with custom headers and request bodies.',
     categories: ['technical'],
   },
   {
-    question: 'How is data encrypted at rest and in transit?',
+    question: 'How often are health checks performed?',
     answer:
-      'All data in transit is encrypted using TLS 1.3 with AES-256-GCM. Data at rest uses envelope encryption with customer-managed keys (BYOK). Our key management integrates with AWS KMS, GCP Cloud KMS, and HashiCorp Vault.',
-    categories: ['security'],
-  },
-  {
-    question: 'Does it support legacy PLC protocols?',
-    answer:
-      'Yes, WatchDog supports Modbus TCP/RTU, OPC-UA, MQTT, and BACnet protocols out of the box. Custom protocol adapters can be configured through our plugin SDK for proprietary industrial systems.',
+      'You can configure check intervals per service, with a minimum of 30 seconds. Each service is checked independently at your chosen interval.',
     categories: ['technical'],
   },
   {
-    question: 'What are the API rate limits for enterprise users?',
+    question: 'What metrics are tracked?',
     answer:
-      'Enterprise plans include 10,000 req/min for REST endpoints and unlimited WebSocket connections. GraphQL queries are rate-limited at 5,000 operations/min with burst capacity up to 15,000.',
+      'For each service, we track uptime percentage, average response time, status codes, success/failure counts, and maintain a complete log of all health checks with timestamps.',
+    categories: ['technical'],
+  },
+  {
+    question: 'Does it support alerts or notifications?',
+    answer:
+      'Alert functionality is currently not implemented. The dashboard provides real-time visibility into service health, response times, and error logs.',
     categories: ['pricing', 'technical'],
   },
 ]
@@ -121,11 +121,11 @@ export function FaqSection({ isActive }: FaqSectionProps) {
         <div className="faq-badge flex items-center gap-2 text-primary">
           <Monitor className="h-4 w-4" />
           <span className="text-[10px] font-bold uppercase tracking-[0.3em]">
-            WatchDog // FAQ
+            Monitor Central // FAQ
           </span>
         </div>
         <h2 className="faq-title mt-3 text-center text-3xl font-black uppercase tracking-tight text-text-white md:text-5xl">
-          Everything You <span className="text-primary">Need To Know</span>
+          Frequently Asked <span className="text-primary">Questions</span>
         </h2>
 
         {/* Search */}
@@ -135,7 +135,7 @@ export function FaqSection({ isActive }: FaqSectionProps) {
             type="text"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            placeholder="FILTER_TECHNICAL_DATABASE..."
+            placeholder="Search questions..."
             className="flex-1 bg-transparent text-xs font-medium tracking-wider text-text-white placeholder:text-text-tertiary focus:outline-none"
           />
           <div className="hidden items-center gap-0.5 rounded border border-border-light px-1.5 py-0.5 sm:flex">
@@ -206,10 +206,10 @@ export function FaqSection({ isActive }: FaqSectionProps) {
         <div className="faq-support mt-6 flex w-full flex-col items-center justify-between gap-4 rounded-lg border border-border-light bg-bg-secondary p-5 sm:flex-row">
           <div>
             <h3 className="text-sm font-bold uppercase tracking-wider text-text-white">
-              Still Have Questions?
+              Need Help?
             </h3>
             <p className="mt-1 text-[10px] uppercase tracking-widest text-text-secondary">
-              Our technical engineers are online 24/7/365.
+              Check our docs or open an issue on GitHub.
             </p>
           </div>
           <div className="flex items-center gap-3">
@@ -233,12 +233,11 @@ export function FaqSection({ isActive }: FaqSectionProps) {
         {/* Footer bar */}
         <div className="mt-4 flex w-full items-center justify-between text-[8px] uppercase tracking-widest text-text-tertiary">
           <span>
-            System Status:{' '}
-            <span className="font-bold text-primary">Operational</span>
+            Monitor Central v1.0
           </span>
-          <span>Region: US-EAST-1</span>
+          <span>Open Source</span>
           <span className="hidden sm:block">
-            &copy; 2024 WatchDog Infrastructure Group
+            MIT License
           </span>
         </div>
       </div>

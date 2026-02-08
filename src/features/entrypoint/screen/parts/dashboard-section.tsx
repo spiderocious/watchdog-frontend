@@ -11,11 +11,11 @@ import {
   Server,
 } from '@icons/index.ts'
 
-function SystemHealthGrid() {
-  const cells = Array.from({ length: 18 }, (_, i) => {
-    if (i === 5) return 'bg-yellow-500/70'
-    if (i < 12) return 'bg-primary/60'
-    return 'bg-primary/30'
+function ServiceHealthMatrix() {
+  const cells = Array.from({ length: 12 }, (_, i) => {
+    if (i === 5) return 'bg-status-error/70'
+    if (i < 9) return 'bg-status-success/60'
+    return 'bg-status-success/30'
   })
 
   return (
@@ -28,10 +28,10 @@ function SystemHealthGrid() {
           <div className="rounded-[1px] bg-primary" />
         </div>
         <span className="text-[8px] font-bold uppercase tracking-widest text-text-secondary">
-          System Health
+          Service Health
         </span>
       </div>
-      <div className="grid grid-cols-6 gap-1">
+      <div className="grid grid-cols-4 gap-1">
         {cells.map((color, i) => (
           <div key={i} className={`h-4 w-full rounded-sm ${color}`} />
         ))}
@@ -40,17 +40,17 @@ function SystemHealthGrid() {
   )
 }
 
-function IngestionChart() {
+function ResponseTimeChart() {
   const bars = [45, 30, 55, 25, 65, 40, 70]
 
   return (
     <div className="rounded-lg border border-primary/15 bg-bg-primary/80 p-3">
       <p className="text-[8px] font-bold uppercase tracking-widest text-text-secondary">
-        Real-Time Ingestion (req/s)
+        Response Times (Last Hour)
       </p>
       <div className="mt-1 flex items-baseline gap-3">
-        <span className="text-2xl font-black text-text-white">14,284</span>
-        <span className="text-[9px] font-bold text-primary">+12.4% from prev hour</span>
+        <span className="text-2xl font-black text-text-white">142</span>
+        <span className="text-[9px] font-bold text-text-secondary">ms avg</span>
       </div>
       <div className="mt-3 flex items-end gap-1.5">
         {bars.map((h, i) => (
@@ -65,24 +65,24 @@ function IngestionChart() {
   )
 }
 
-function CriticalAlerts() {
+function RecentErrors() {
   return (
     <div className="rounded-lg border border-primary/15 bg-bg-primary/80 p-3">
       <div className="mb-2 flex items-center gap-1.5">
-        <AlertTriangle className="h-3 w-3 text-status-warning" />
+        <AlertTriangle className="h-3 w-3 text-status-error" />
         <span className="text-[8px] font-bold uppercase tracking-widest text-text-secondary">
-          Critical Alerts
+          Recent Errors
         </span>
       </div>
       <div className="space-y-1.5">
         <div className="rounded border-l-2 border-status-error bg-status-error/10 px-2 py-1.5">
-          <p className="text-[8px] font-bold uppercase text-status-error">Database Pressure</p>
-          <p className="text-[8px] text-text-secondary">Connection pool at 98% capacity.</p>
+          <p className="text-[8px] font-bold uppercase text-status-error">Payment Service</p>
+          <p className="text-[8px] text-text-secondary">503 Service Unavailable</p>
         </div>
         <div className="rounded border-l-2 border-status-warning bg-status-warning/10 px-2 py-1.5">
-          <p className="text-[8px] font-bold uppercase text-status-warning">Network Drift</p>
+          <p className="text-[8px] font-bold uppercase text-status-warning">Staging API</p>
           <p className="text-[8px] text-text-secondary">
-            Sync delay exceeds 500ms between regions.
+            Timeout after 5000ms
           </p>
         </div>
       </div>
@@ -90,11 +90,11 @@ function CriticalAlerts() {
   )
 }
 
-function ActiveNodes() {
-  const nodes = [
-    { name: 'node-east-01', status: 'ONLINE', color: 'text-primary' },
-    { name: 'node-east-02', status: 'ONLINE', color: 'text-primary' },
-    { name: 'node-west-01', status: 'WARNING', color: 'text-status-warning' },
+function ServicesList() {
+  const services = [
+    { name: 'Production API', status: 'ACTIVE', color: 'text-status-success' },
+    { name: 'Staging API', status: 'ACTIVE', color: 'text-status-success' },
+    { name: 'Payment Service', status: 'DOWN', color: 'text-status-error' },
   ]
 
   return (
@@ -102,15 +102,15 @@ function ActiveNodes() {
       <div className="mb-2 flex items-center gap-1.5">
         <Server className="h-3 w-3 text-text-secondary" />
         <span className="text-[8px] font-bold uppercase tracking-widest text-text-secondary">
-          Active Nodes
+          Monitored Services
         </span>
       </div>
       <div className="space-y-1.5">
-        {nodes.map((node) => (
-          <div key={node.name} className="flex items-center justify-between">
-            <span className="text-[9px] text-text-secondary">{node.name}</span>
-            <span className={`text-[8px] font-bold uppercase ${node.color}`}>
-              {node.status}
+        {services.map((service) => (
+          <div key={service.name} className="flex items-center justify-between">
+            <span className="text-[9px] text-text-secondary">{service.name}</span>
+            <span className={`text-[8px] font-bold uppercase ${service.color}`}>
+              {service.status}
             </span>
           </div>
         ))}
@@ -119,22 +119,22 @@ function ActiveNodes() {
   )
 }
 
-function DiagnosticsLog() {
+function HealthCheckLog() {
   const logs = [
-    { time: '20:44:01', level: 'INFO', color: 'text-status-info', msg: 'Cluster synchronization started.' },
-    { time: '20:44:05', level: 'WARN', color: 'text-status-warning', msg: 'Latency spike detected in US-WEST-2.' },
-    { time: '20:44:08', level: 'EXEC', color: 'text-primary', msg: 'Automated remediation script 0x4F triggered.' },
-    { time: '20:44:12', level: 'OK', color: 'text-primary', msg: 'System stabilized. Latency at 14ms.' },
+    { time: '14:44:01', level: 'OK', color: 'text-status-success', msg: 'Production API responded 200 in 142ms' },
+    { time: '14:43:31', level: 'OK', color: 'text-status-success', msg: 'Staging API responded 200 in 89ms' },
+    { time: '14:43:01', level: 'ERROR', color: 'text-status-error', msg: 'Payment Service returned 503' },
+    { time: '14:42:31', level: 'OK', color: 'text-status-success', msg: 'Production API responded 200 in 145ms' },
   ]
 
   return (
     <div className="rounded-lg border border-primary/15 bg-bg-primary/80 p-3">
       <div className="flex items-center justify-between">
         <span className="text-[8px] font-bold uppercase tracking-widest text-text-secondary">
-          Diagnostics Log
+          Health Check Log
         </span>
         <span className="rounded bg-primary/20 px-1.5 py-0.5 text-[7px] font-bold uppercase text-primary">
-          Auto_Refresh: ON
+          Live
         </span>
       </div>
       <div className="mt-2 space-y-1 font-mono">
@@ -162,24 +162,24 @@ function DashboardMockup() {
             <div className="h-2.5 w-2.5 rounded-full bg-green-500" />
           </div>
           <span className="text-[8px] font-medium tracking-wider text-text-tertiary">
-            SCADA_V2.4.0 // LIVE_TELEMETRY
+            MONITOR CENTRAL // DASHBOARD
           </span>
         </div>
         <div className="flex items-center gap-2">
           <div className="h-1.5 w-20 overflow-hidden rounded-full bg-bg-tertiary">
-            <div className="h-full w-4/5 rounded-full bg-primary" />
+            <div className="h-full w-2/3 rounded-full bg-status-success" />
           </div>
-          <span className="text-[8px] font-bold text-primary">Sync: 99.0%</span>
+          <span className="text-[8px] font-bold text-status-success">Uptime: 99.2%</span>
         </div>
       </div>
       {/* Grid layout */}
       <div className="mt-3 grid grid-cols-3 gap-2">
-        <SystemHealthGrid />
-        <IngestionChart />
-        <CriticalAlerts />
-        <ActiveNodes />
+        <ServiceHealthMatrix />
+        <ResponseTimeChart />
+        <RecentErrors />
+        <ServicesList />
         <div className="col-span-2">
-          <DiagnosticsLog />
+          <HealthCheckLog />
         </div>
       </div>
     </div>
@@ -194,9 +194,9 @@ const FEATURE_ICONS = [
 ]
 
 const STATS_BAR = [
-  { value: '15+', label: 'Monitoring Regions' },
-  { value: '30s', label: 'Check Intervals' },
-  { value: '<5s', label: 'Alert Delivery' },
+  { value: '30s', label: 'Min Check Interval' },
+  { value: '100%', label: 'Customizable' },
+  { value: 'REST', label: 'API Access' },
 ]
 
 type DashboardSectionProps = {
@@ -281,16 +281,16 @@ export function DashboardSection({ isActive }: DashboardSectionProps) {
       <div className="flex w-full max-w-6xl flex-col items-center">
         {/* Header */}
         <p className="ds-tag text-[10px] font-bold uppercase tracking-[0.3em] text-primary">
-          — Your Command Center —
+          — Clean Dashboard —
         </p>
         <h2 className="ds-title mt-3 text-center text-3xl font-black uppercase tracking-tight text-text-white md:text-5xl">
-          Mission Control For Your
+          Monitor All Your
           <br />
-          <span className="text-primary">Infrastructure</span>
+          <span className="text-primary">Endpoints</span>
         </h2>
         <p className="ds-subtitle mt-3 max-w-xl text-center text-xs text-text-secondary md:text-sm">
-          Real-time telemetry, automated diagnostics, and industrial-grade monitoring for
-          mission-critical backend systems.
+          Simple dashboard showing service health, response times, and error logs.
+          Everything you need to track uptime at a glance.
         </p>
 
         {/* Dashboard mockup with floating badges */}
@@ -301,11 +301,11 @@ export function DashboardSection({ isActive }: DashboardSectionProps) {
               <div className="flex items-center gap-2">
                 <Activity className="h-3.5 w-3.5 text-primary" />
                 <span className="text-[9px] font-bold uppercase tracking-wider text-text-white">
-                  At-a-Glance Status
+                  Service Overview
                 </span>
               </div>
               <p className="mt-1 max-w-[140px] text-[8px] text-text-secondary">
-                Status matrix for health assessment across entire fleets.
+                View all monitored endpoints and their current health status.
               </p>
             </div>
           </div>
@@ -316,11 +316,11 @@ export function DashboardSection({ isActive }: DashboardSectionProps) {
               <div className="flex items-center gap-2">
                 <Zap className="h-3.5 w-3.5 text-primary" />
                 <span className="text-[9px] font-bold uppercase tracking-wider text-text-white">
-                  Low-Latency Alerts
+                  Response Metrics
                 </span>
               </div>
               <p className="mt-1 max-w-[140px] text-[8px] text-text-secondary">
-                Push-based notification engine delivering under 5 seconds.
+                Track response times and identify performance issues.
               </p>
             </div>
           </div>
@@ -331,11 +331,11 @@ export function DashboardSection({ isActive }: DashboardSectionProps) {
               <div className="flex items-center gap-2">
                 <Activity className="h-3.5 w-3.5 text-primary" />
                 <span className="text-[9px] font-bold uppercase tracking-wider text-text-white">
-                  Deep Telemetry
+                  Error Tracking
                 </span>
               </div>
               <p className="mt-1 max-w-[140px] text-[8px] text-text-secondary">
-                High-frequency sampling and deep-packet diagnostics out of the box.
+                View recent errors with status codes and timestamps.
               </p>
             </div>
           </div>
