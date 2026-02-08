@@ -44,7 +44,7 @@ export function ServicesPagination({
 
   return (
     <div className="flex flex-col items-center justify-between gap-3 sm:flex-row">
-      <span className="text-[10px] font-bold uppercase tracking-wider text-text-muted">
+      <span className="text-[10px] font-bold uppercase tracking-wider text-text-secondary">
         Showing {from} to {to} of {total} services
       </span>
 
@@ -62,7 +62,7 @@ export function ServicesPagination({
           p === '...' ? (
             <span
               key={`ellipsis-${i}`}
-              className="flex h-8 w-8 items-center justify-center text-[10px] text-text-muted"
+              className="flex h-8 w-8 items-center justify-center text-[10px] text-text-secondary"
             >
               ...
             </span>

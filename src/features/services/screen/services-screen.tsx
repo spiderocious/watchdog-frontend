@@ -92,11 +92,11 @@ export function ServicesScreen() {
           if (data.total === 0 && !debouncedSearch && !statusFilter) {
             return (
               <div className="flex flex-1 flex-col items-center justify-center gap-4">
-                <Network className="h-12 w-12 text-text-muted/40" />
+                <Network className="h-12 w-12 text-text-secondary/40" />
                 <span className="text-sm uppercase tracking-wider text-text-white">
                   No services configured
                 </span>
-                <span className="max-w-[300px] text-center text-[11px] leading-relaxed tracking-wider text-text-muted">
+                <span className="max-w-[300px] text-center text-[11px] leading-relaxed tracking-wider text-text-secondary">
                   Add your first service to start monitoring endpoints, APIs, and infrastructure
                 </span>
                 <button
@@ -117,8 +117,8 @@ export function ServicesScreen() {
               <>
                 <ServicesStats overview={data.overview} items={[]} />
                 <div className="flex h-60 flex-col items-center justify-center gap-3 rounded-lg border border-border-light bg-bg-secondary">
-                  <Network className="h-8 w-8 text-text-muted/40" />
-                  <span className="text-xs uppercase tracking-wider text-text-muted">
+                  <Network className="h-8 w-8 text-text-secondary/40" />
+                  <span className="text-xs uppercase tracking-wider text-text-secondary">
                     No services match your filters
                   </span>
                 </div>

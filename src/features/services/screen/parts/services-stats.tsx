@@ -28,7 +28,7 @@ export function ServicesStats({ overview, items }: ServicesStatsProps) {
     <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
       {/* Uptime Avg */}
       <div className="flex flex-col gap-1 rounded-lg border border-border-light bg-bg-secondary p-4">
-        <span className="text-[9px] font-bold uppercase tracking-wider text-text-muted">
+        <span className="text-[9px] font-bold uppercase tracking-wider text-text-secondary">
           Uptime Avg
         </span>
         <div className="flex items-baseline gap-1.5">
@@ -41,14 +41,14 @@ export function ServicesStats({ overview, items }: ServicesStatsProps) {
 
       {/* Total Services */}
       <div className="flex flex-col gap-1 rounded-lg border border-border-light bg-bg-secondary p-4">
-        <span className="text-[9px] font-bold uppercase tracking-wider text-text-muted">
+        <span className="text-[9px] font-bold uppercase tracking-wider text-text-secondary">
           Total Services
         </span>
         <div className="flex items-baseline gap-1.5">
           <span className="font-mono text-3xl font-bold text-text-white">
             {overview.total_services}
           </span>
-          <span className="text-[10px] uppercase tracking-wider text-text-muted">
+          <span className="text-[10px] uppercase tracking-wider text-text-secondary">
             stable
           </span>
         </div>
@@ -60,7 +60,7 @@ export function ServicesStats({ overview, items }: ServicesStatsProps) {
           ? 'border-status-error/40 bg-status-error/5'
           : 'border-border-light bg-bg-secondary'
       }`}>
-        <span className="text-[9px] font-bold uppercase tracking-wider text-text-muted">
+        <span className="text-[9px] font-bold uppercase tracking-wider text-text-secondary">
           Critical
         </span>
         <div className="flex items-baseline gap-1.5">
@@ -70,7 +70,7 @@ export function ServicesStats({ overview, items }: ServicesStatsProps) {
             {criticalCount}
           </span>
           <span className={`text-[10px] uppercase tracking-wider ${
-            criticalCount > 0 ? 'text-status-error' : 'text-text-muted'
+            criticalCount > 0 ? 'text-status-error' : 'text-text-secondary'
           }`}>
             {criticalCount > 0 ? 'pulsing' : 'clear'}
           </span>
@@ -79,20 +79,20 @@ export function ServicesStats({ overview, items }: ServicesStatsProps) {
 
       {/* Latency */}
       <div className="flex flex-col gap-1 rounded-lg border border-border-light bg-bg-secondary p-4">
-        <span className="text-[9px] font-bold uppercase tracking-wider text-text-muted">
+        <span className="text-[9px] font-bold uppercase tracking-wider text-text-secondary">
           Latency
         </span>
         <div className="flex items-baseline gap-1.5">
           <span className="font-mono text-3xl font-bold text-text-white">
             {avgLatency}
           </span>
-          <span className="text-sm font-bold text-text-muted">ms</span>
+          <span className="text-sm font-bold text-text-secondary">ms</span>
         </div>
       </div>
 
       {/* Active Alerts */}
       <div className="col-span-2 flex flex-col gap-1 rounded-lg border border-border-light bg-bg-secondary p-4 sm:col-span-1 lg:col-span-1">
-        <span className="text-[9px] font-bold uppercase tracking-wider text-text-muted">
+        <span className="text-[9px] font-bold uppercase tracking-wider text-text-secondary">
           Active Alerts
         </span>
         <div className="flex items-baseline gap-1.5">
@@ -101,7 +101,7 @@ export function ServicesStats({ overview, items }: ServicesStatsProps) {
           }`}>
             {alertCount}
           </span>
-          <span className="text-[10px] uppercase tracking-wider text-text-muted">
+          <span className="text-[10px] uppercase tracking-wider text-text-secondary">
             {alertCount === 0 ? 'clear' : 'Normal range'}
           </span>
         </div>
