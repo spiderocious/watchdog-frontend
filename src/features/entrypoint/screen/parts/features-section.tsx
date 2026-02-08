@@ -224,34 +224,34 @@ export function FeaturesSection({ isActive }: FeaturesSectionProps) {
         <p className="section-tag text-[10px] font-bold uppercase tracking-[0.3em] text-primary">
           — Core Features —
         </p>
-        <h2 className="section-title mt-3 text-center text-3xl font-black uppercase tracking-tight text-text-white md:text-5xl lg:text-6xl">
+        <h2 className="section-title mt-2 text-center text-2xl font-black uppercase tracking-tight text-text-white sm:mt-3 sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl">
           Simple Yet Powerful
         </h2>
-        <div className="section-bar mt-4 h-1 w-16 origin-center rounded-full bg-primary" />
+        <div className="section-bar mt-3 h-1 w-12 origin-center rounded-full bg-primary sm:w-16 md:mt-4" />
 
         {/* Cards grid */}
-        <div className="mt-4 grid w-full grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 mb-8">
+        <div className="mb-6 mt-6 grid w-full grid-cols-1 gap-3 sm:gap-4 md:grid-cols-2 md:gap-4 lg:grid-cols-3 lg:gap-4">
           {FEATURES.map((feature) => {
             const Illustration = ILLUSTRATION_MAP[feature.illustration]
             return (
               <div
                 key={feature.title}
-                className="feature-card group flex flex-col justify-between rounded-lg border border-primary/20 bg-primary/5 p-5 transition-all duration-300 hover:border-primary/40 hover:bg-primary/10 md:p-6"
+                className="feature-card group flex flex-col justify-between rounded-lg border border-primary/20 bg-primary/5 p-4 transition-all duration-300 hover:border-primary/40 hover:bg-primary/10 sm:p-5 md:p-6"
               >
                 <div>
-                  <div className="flex items-center gap-3">
-                    <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary/15">
-                      <feature.icon className="h-4.5 w-4.5 text-primary" />
+                  <div className="flex items-center gap-2.5 sm:gap-3">
+                    <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary/15 sm:h-9 sm:w-9">
+                      <feature.icon className="h-4 w-4 text-primary sm:h-4.5 sm:w-4.5" />
                     </div>
-                    <h3 className="text-sm font-bold text-text-white md:text-base">
+                    <h3 className="text-[13px] font-bold text-text-white sm:text-sm md:text-base">
                       {feature.title}
                     </h3>
                   </div>
-                  <p className="mt-3 text-xs leading-relaxed text-text-secondary md:text-sm">
+                  <p className="mt-2.5 text-[11px] leading-relaxed text-text-secondary sm:mt-3 sm:text-xs md:text-sm">
                     {feature.description}
                   </p>
                 </div>
-                <div className="mt-5 flex items-center justify-center opacity-60 transition-opacity group-hover:opacity-100">
+                <div className="mt-4 flex items-center justify-center opacity-60 transition-opacity group-hover:opacity-100 sm:mt-5">
                   <Illustration />
                 </div>
               </div>
@@ -261,19 +261,19 @@ export function FeaturesSection({ isActive }: FeaturesSectionProps) {
 
         {/* CTA Banner */}
         <div
-          className="mt-12 flex w-full flex-col items-center justify-between gap-5 rounded-xl border border-primary/30 bg-gradient-to-r from-primary/15 via-primary/10 to-cyan-500/15 p-6 md:flex-row md:p-8"
+          className="mt-8 flex w-full flex-col items-center justify-between gap-4 rounded-xl border border-primary/30 bg-gradient-to-r from-primary/15 via-primary/10 to-cyan-500/15 p-5 md:mt-12 md:flex-row md:gap-5 md:p-6 lg:p-8"
         >
           <div>
-            <h3 className="text-xl font-black uppercase tracking-tight text-text-white md:text-2xl">
+            <h3 className="text-lg font-black uppercase tracking-tight text-text-white sm:text-xl md:text-2xl">
               Ready To Start Monitoring?
             </h3>
-            <p className="mt-1 text-xs text-text-secondary md:text-sm">
+            <p className="mt-1 text-[11px] text-text-secondary sm:text-xs md:text-sm">
               Add your first endpoint in seconds. No credit card required.
             </p>
           </div>
           <Link
             to={ROUTES.AUTH.REGISTER}
-            className="flex-shrink-0 rounded-lg bg-bg-primary px-8 py-3.5 text-[11px] font-bold uppercase tracking-widest text-primary border border-primary/30 transition-all hover:bg-primary hover:text-bg-primary"
+            className="min-h-11 shrink-0 rounded-lg border border-primary/30 bg-bg-primary px-8 py-3.5 text-[11px] font-bold uppercase tracking-widest text-primary transition-all hover:bg-primary hover:text-bg-primary"
           >
             Start Monitoring Free
           </Link>
