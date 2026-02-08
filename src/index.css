@@ -1,0 +1,64 @@
+@import "tailwindcss";
+
+@theme {
+  /* Backgrounds */
+  --color-bg-primary: #0d0d0d;
+  --color-bg-secondary: #1a1a1a;
+  --color-bg-tertiary: #242424;
+  --color-bg-pure-black: #000000;
+
+  /* Status Colors */
+  --color-status-success: #00ff88;
+  --color-status-warning: #ffaa00;
+  --color-status-error: #ff3333;
+  --color-status-info: #00aaff;
+
+  /* Text Colors */
+  --color-text-primary: #e0e0e0;
+  --color-text-secondary: #999999;
+  --color-text-tertiary: #666666;
+  --color-text-muted: #444444;
+  --color-text-white: #ffffff;
+
+  /* Borders */
+  --color-border-light: #2a2a2a;
+  --color-border-medium: #333333;
+  --color-border-hover: #3a3a3a;
+
+  /* Interactive */
+  --color-primary: #00ff88;
+  --color-primary-hover: #00ff99;
+  --color-primary-text: #0d0d0d;
+  --color-link: #00aaff;
+  --color-link-hover: #33bbff;
+
+  /* Service Status */
+  --color-service-operational: #00ff88;
+  --color-service-degraded: #ffaa00;
+  --color-service-down: #ff3333;
+  --color-service-paused: #666666;
+
+  /* Chart Colors */
+  --color-chart-response: #00aaff;
+  --color-chart-request: #00ff88;
+  --color-chart-error: #ffaa00;
+  --color-chart-latency: #ff3333;
+  --color-chart-grid: #2a2a2a;
+
+  /* Font */
+  --font-sans: "Quicksand", sans-serif;
+}
+
+body {
+  background-color: var(--color-bg-primary);
+  color: var(--color-text-primary);
+  font-family: var(--font-sans);
+  margin: 0;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#root {
+  min-height: 100vh;
+}
