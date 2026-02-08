@@ -91,9 +91,9 @@ export function HeroSection({ onScrollDown }: HeroSectionProps) {
       ref={sectionRef}
       className="relative flex h-screen w-full flex-col justify-between overflow-hidden px-6 pt-24 pb-8 md:px-10 lg:px-16"
     >
-      <div className="flex flex-1 flex-col justify-center gap-8 lg:flex-row lg:items-center lg:gap-12">
+      <div className="flex flex-1 flex-col justify-center gap-6 lg:flex-row lg:items-center lg:gap-12">
         {/* Left content */}
-        <div className="flex max-w-2xl flex-1 flex-col gap-6">
+        <div className="flex max-w-2xl flex-1 flex-col gap-5 lg:gap-6">
           <div data-hero-tag className="flex items-center gap-2">
             <span className="text-primary">&#9889;</span>
             <span className="text-[10px] font-bold uppercase tracking-widest text-primary">
@@ -103,24 +103,24 @@ export function HeroSection({ onScrollDown }: HeroSectionProps) {
 
           <h1
             data-hero-headline
-            className="text-5xl font-black uppercase leading-[0.95] tracking-tight text-text-white sm:text-6xl md:text-7xl lg:text-8xl"
+            className="text-4xl font-black uppercase leading-[0.95] tracking-tight text-text-white sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl"
           >
             Monitor Your Endpoints With Ease
           </h1>
 
           <p
             data-hero-subtitle
-            className="max-w-lg text-sm leading-relaxed tracking-wide text-text-secondary sm:text-base"
+            className="max-w-lg text-xs leading-relaxed tracking-wide text-text-secondary sm:text-sm"
           >
             Track uptime and response times for your HTTP endpoints.
             Clean dashboard, real-time monitoring, and zero hassle.
             Perfect for developers who need straightforward visibility.
           </p>
 
-          <div data-hero-cta className="flex flex-wrap items-center gap-4">
+          <div data-hero-cta className="flex flex-wrap items-center gap-3">
             <Link
               to={ROUTES.AUTH.REGISTER}
-              className="flex items-center gap-2 rounded-lg bg-primary px-6 py-4 text-[11px] font-bold uppercase tracking-wider text-primary-text transition-colors hover:bg-primary-hover sm:px-8"
+              className="flex items-center justify-center gap-2 rounded-lg bg-primary px-8 py-4 text-[11px] font-bold uppercase tracking-wider text-primary-text transition-colors hover:bg-primary-hover min-h-11"
             >
               Start Monitoring Free
               <ArrowRight className="h-4 w-4" />
@@ -130,7 +130,7 @@ export function HeroSection({ onScrollDown }: HeroSectionProps) {
           {/* Trust badges */}
           <div
             data-hero-badges
-            className="flex flex-wrap items-center gap-6 pt-4"
+            className="flex flex-wrap items-center gap-4 pt-2 sm:gap-6"
           >
             <div className="flex items-center gap-2">
               <CheckCircle className="h-4 w-4 text-text-secondary" />
@@ -154,33 +154,33 @@ export function HeroSection({ onScrollDown }: HeroSectionProps) {
         </div>
 
         {/* Right: Terminal + floating stats */}
-        <div className="relative hidden flex-1 lg:flex lg:justify-end">
+        <div className="relative flex flex-1 justify-center lg:justify-end">
           {/* Terminal card */}
           <div
             data-hero-terminal
-            className="relative w-full max-w-lg rounded-xl border border-border-light bg-bg-secondary/80 shadow-2xl backdrop-blur-sm"
+            className="relative w-full max-w-sm rounded-xl border border-border-light bg-bg-secondary/80 shadow-2xl backdrop-blur-sm lg:max-w-lg"
           >
             {/* Title bar */}
-            <div className="flex items-center justify-between border-b border-border-light px-4 py-3">
+            <div className="flex items-center justify-between border-b border-border-light px-3 py-2.5 lg:px-4 lg:py-3">
               <div className="flex items-center gap-1.5">
-                <div className="h-2.5 w-2.5 rounded-full bg-status-error" />
-                <div className="h-2.5 w-2.5 rounded-full bg-status-warning" />
-                <div className="h-2.5 w-2.5 rounded-full bg-status-success" />
+                <div className="h-2 w-2 rounded-full bg-status-error lg:h-2.5 lg:w-2.5" />
+                <div className="h-2 w-2 rounded-full bg-status-warning lg:h-2.5 lg:w-2.5" />
+                <div className="h-2 w-2 rounded-full bg-status-success lg:h-2.5 lg:w-2.5" />
               </div>
               <div className="flex items-center gap-1.5">
                 <div className="h-1.5 w-1.5 rounded-full bg-status-success" />
-                <span className="text-[9px] font-bold uppercase tracking-widest text-status-success">
+                <span className="text-[8px] font-bold uppercase tracking-widest text-status-success lg:text-[9px]">
                   Live Monitoring
                 </span>
               </div>
             </div>
 
             {/* Terminal body */}
-            <div className="flex flex-col gap-3 p-5 font-mono text-sm">
+            <div className="flex flex-col gap-2 p-3 font-mono text-xs lg:gap-3 lg:p-5 lg:text-sm">
               {TERMINAL_LINES.map((line, i) => (
-                <div key={i} data-terminal-line className="flex items-center justify-between gap-4">
+                <div key={i} data-terminal-line className="flex items-center justify-between gap-2 lg:gap-4">
                   {line.type === 'command' && (
-                    <span className="text-text-secondary">
+                    <span className="truncate text-text-secondary">
                       <span className="text-primary">$</span>{' '}
                       {line.text.slice(2)}
                     </span>
@@ -190,17 +190,17 @@ export function HeroSection({ onScrollDown }: HeroSectionProps) {
                   )}
                   {line.type === 'success' && (
                     <>
-                      <span>
+                      <span className="truncate">
                         <span className="text-status-success">{line.label}</span>{' '}
                         <span className="text-text-primary">{line.text}</span>
                       </span>
-                      <span className="text-primary">{line.metric}</span>
+                      <span className="shrink-0 text-primary">{line.metric}</span>
                     </>
                   )}
                   {line.type === 'error' && (
                     <>
-                      <span className="text-text-primary">{line.text}</span>
-                      <span className="font-bold text-status-error">{line.metric}</span>
+                      <span className="truncate text-text-primary">{line.text}</span>
+                      <span className="shrink-0 font-bold text-status-error">{line.metric}</span>
                     </>
                   )}
                 </div>
@@ -208,10 +208,10 @@ export function HeroSection({ onScrollDown }: HeroSectionProps) {
             </div>
           </div>
 
-          {/* Floating stat: Services */}
+          {/* Floating stats - hidden on mobile, shown on lg+ */}
           <div
             data-hero-stat
-            className="absolute -right-4 top-0 rounded-lg border border-border-light bg-bg-secondary/90 px-4 py-3 shadow-lg backdrop-blur-sm"
+            className="absolute -right-4 top-0 hidden rounded-lg border border-border-light bg-bg-secondary/90 px-4 py-3 shadow-lg backdrop-blur-sm lg:block"
           >
             <span className="text-[9px] font-bold uppercase tracking-widest text-primary">
               Active Services
@@ -219,10 +219,9 @@ export function HeroSection({ onScrollDown }: HeroSectionProps) {
             <p className="font-mono text-2xl font-bold text-text-white">3</p>
           </div>
 
-          {/* Floating stat: Avg Response */}
           <div
             data-hero-stat
-            className="absolute -left-8 bottom-16 rounded-lg border border-border-light bg-bg-secondary/90 px-4 py-3 shadow-lg backdrop-blur-sm"
+            className="absolute -left-8 bottom-16 hidden rounded-lg border border-border-light bg-bg-secondary/90 px-4 py-3 shadow-lg backdrop-blur-sm lg:block"
           >
             <span className="text-[9px] font-bold uppercase tracking-widest text-text-secondary">
               Avg Response
@@ -232,10 +231,9 @@ export function HeroSection({ onScrollDown }: HeroSectionProps) {
             </p>
           </div>
 
-          {/* Floating stat: Uptime */}
           <div
             data-hero-stat
-            className="absolute -right-2 bottom-4 rounded-lg border border-primary/20 bg-bg-secondary/90 px-4 py-3 shadow-lg backdrop-blur-sm"
+            className="absolute -right-2 bottom-4 hidden rounded-lg border border-primary/20 bg-bg-secondary/90 px-4 py-3 shadow-lg backdrop-blur-sm lg:block"
           >
             <span className="text-[9px] font-bold uppercase tracking-widest text-text-secondary">
               Uptime
@@ -250,9 +248,9 @@ export function HeroSection({ onScrollDown }: HeroSectionProps) {
         type="button"
         data-hero-scroll
         onClick={onScrollDown}
-        className="mx-auto flex flex-col items-center gap-2 pb-4"
+        className="mx-auto flex flex-col items-center gap-2 pb-4 min-h-11"
       >
-        <span className="text-[9px] font-bold uppercase tracking-[0.3em] text-text-secondary">
+        <span className="text-[8px] font-bold uppercase tracking-[0.2em] text-text-secondary sm:text-[9px] sm:tracking-[0.3em]">
           Scroll to Explore Features
         </span>
         <ChevronDown className="h-4 w-4 animate-bounce text-text-secondary" />
