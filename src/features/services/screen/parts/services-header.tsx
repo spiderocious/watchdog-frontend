@@ -35,7 +35,7 @@ export function ServicesHeader({
         <h1 className="text-2xl font-bold uppercase tracking-wider text-text-white">
           Services Overview
         </h1>
-        <p className="text-[11px] uppercase tracking-wider text-text-muted">
+        <p className="text-[11px] uppercase tracking-wider text-text-secondary">
           Real-time Backend Control Panel
         </p>
       </div>
@@ -44,13 +44,13 @@ export function ServicesHeader({
       <div className="flex items-center gap-3">
         {/* Search */}
         <div className="relative">
-          <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-text-muted" />
+          <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-text-secondary" />
           <input
             type="text"
             value={search}
             onChange={(e) => onSearchChange(e.target.value)}
             placeholder="Search services"
-            className="h-9 w-48 rounded-md border border-border-light bg-bg-primary py-2 pl-9 pr-3 font-mono text-[11px] tracking-wider text-text-primary outline-none transition-colors placeholder:text-text-muted focus:border-primary/40 lg:w-64"
+            className="h-9 w-48 rounded-md border border-border-light bg-bg-primary py-2 pl-9 pr-3 font-mono text-[11px] tracking-wider text-text-primary outline-none transition-colors placeholder:text-text-secondary focus:border-primary/40 lg:w-64"
           />
         </div>
 

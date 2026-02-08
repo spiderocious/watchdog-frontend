@@ -96,7 +96,7 @@ export function TelemetryPanel({
       </div>
 
       {/* Limit */}
-      <span className="text-[9px] font-mono uppercase tracking-wider text-text-muted">
+      <span className="text-[9px] font-mono uppercase tracking-wider text-text-secondary">
         Limit: {metric.threshold.toLocaleString()}{metric.unit}
       </span>
     </div>

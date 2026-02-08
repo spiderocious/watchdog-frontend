@@ -29,7 +29,7 @@ export function HealthCheckLog({ logs, serviceEndpoint }: HealthCheckLogProps) {
   const endpointPath = getEndpointPath(serviceEndpoint)
 
   return (
-    <section className="flex flex-col gap-3 rounded-lg border border-border-light bg-bg-secondary p-4">
+    <section className="flex flex-col gap-3 rounded-lg border border-border-light bg-bg-secondary p-4 max-h-[500px]">
       <div className="flex items-center justify-between">
         <h2 className="text-xs font-bold uppercase tracking-wider text-text-primary">
           Health Check Log
@@ -46,7 +46,7 @@ export function HealthCheckLog({ logs, serviceEndpoint }: HealthCheckLogProps) {
           </div>
         }
       >
-        <div className="overflow-x-auto">
+        <div className="overflow-x-scroll">
           <table className="w-full text-left">
             <thead>
               <tr className="border-b border-border-light">

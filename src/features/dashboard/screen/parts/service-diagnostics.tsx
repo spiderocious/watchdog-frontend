@@ -51,22 +51,22 @@ export function ServiceDiagnostics({ checkLogs, services }: ServiceDiagnosticsPr
           <table className="w-full text-left">
             <thead>
               <tr className="border-b border-border-light">
-                <th className="px-2 py-2 text-[9px] font-bold uppercase tracking-wider text-text-muted">
+                <th className="px-2 py-2 text-[9px] font-bold uppercase tracking-wider text-text-secondary">
                   ID
                 </th>
-                <th className="px-2 py-2 text-[9px] font-bold uppercase tracking-wider text-text-muted">
+                <th className="px-2 py-2 text-[9px] font-bold uppercase tracking-wider text-text-secondary">
                   Service
                 </th>
-                <th className="hidden px-2 py-2 text-[9px] font-bold uppercase tracking-wider text-text-muted sm:table-cell">
+                <th className="hidden px-2 py-2 text-[9px] font-bold uppercase tracking-wider text-text-secondary sm:table-cell">
                   Endpoint
                 </th>
-                <th className="px-2 py-2 text-[9px] font-bold uppercase tracking-wider text-text-muted">
+                <th className="px-2 py-2 text-[9px] font-bold uppercase tracking-wider text-text-secondary">
                   Value
                 </th>
-                <th className="px-2 py-2 text-[9px] font-bold uppercase tracking-wider text-text-muted">
+                <th className="px-2 py-2 text-[9px] font-bold uppercase tracking-wider text-text-secondary">
                   Latency
                 </th>
-                <th className="px-2 py-2 text-[9px] font-bold uppercase tracking-wider text-text-muted">
+                <th className="px-2 py-2 text-[9px] font-bold uppercase tracking-wider text-text-secondary">
                   Status
                 </th>
               </tr>
