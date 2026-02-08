@@ -1,7 +1,7 @@
 import { useRef, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import gsap from 'gsap'
-import { Activity, Bell, Mail, AlertTriangle } from '@icons/index.ts'
+import { Activity, Bell } from '@icons/index.ts'
 import { ROUTES } from '@shared/constants/routes.ts'
 
 const STEPS = [
