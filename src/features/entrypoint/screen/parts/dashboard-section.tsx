@@ -155,30 +155,30 @@ function DashboardMockup() {
     <div className="rounded-xl border border-primary/20 bg-bg-secondary p-3 shadow-2xl shadow-primary/5 md:p-4">
       {/* Title bar */}
       <div className="flex items-center justify-between border-b border-border-primary/15 pb-2">
-        <div className="flex items-center gap-3">
-          <div className="flex gap-1.5">
-            <div className="h-2.5 w-2.5 rounded-full bg-red-500" />
-            <div className="h-2.5 w-2.5 rounded-full bg-yellow-500" />
-            <div className="h-2.5 w-2.5 rounded-full bg-green-500" />
+        <div className="flex items-center gap-2 md:gap-3">
+          <div className="flex gap-1 md:gap-1.5">
+            <div className="h-2 w-2 rounded-full bg-red-500 md:h-2.5 md:w-2.5" />
+            <div className="h-2 w-2 rounded-full bg-yellow-500 md:h-2.5 md:w-2.5" />
+            <div className="h-2 w-2 rounded-full bg-green-500 md:h-2.5 md:w-2.5" />
           </div>
-          <span className="text-[8px] font-medium tracking-wider text-text-tertiary">
+          <span className="text-[7px] font-medium tracking-wider text-text-tertiary md:text-[8px]">
             MONITOR CENTRAL // DASHBOARD
           </span>
         </div>
-        <div className="flex items-center gap-2">
-          <div className="h-1.5 w-20 overflow-hidden rounded-full bg-bg-tertiary">
+        <div className="flex items-center gap-1.5 md:gap-2">
+          <div className="hidden h-1.5 w-12 overflow-hidden rounded-full bg-bg-tertiary sm:block md:w-20">
             <div className="h-full w-2/3 rounded-full bg-status-success" />
           </div>
-          <span className="text-[8px] font-bold text-status-success">Uptime: 99.2%</span>
+          <span className="text-[7px] font-bold text-status-success md:text-[8px]">99.2%</span>
         </div>
       </div>
-      {/* Grid layout */}
-      <div className="mt-3 grid grid-cols-3 gap-2">
+      {/* Grid layout - responsive */}
+      <div className="mt-2 grid grid-cols-1 gap-2 sm:grid-cols-2 md:mt-3 lg:grid-cols-3">
         <ServiceHealthMatrix />
         <ResponseTimeChart />
         <RecentErrors />
         <ServicesList />
-        <div className="col-span-2">
+        <div className="sm:col-span-2">
           <HealthCheckLog />
         </div>
       </div>
@@ -283,12 +283,12 @@ export function DashboardSection({ isActive }: DashboardSectionProps) {
         <p className="ds-tag text-[10px] font-bold uppercase tracking-[0.3em] text-primary">
           — Clean Dashboard —
         </p>
-        <h2 className="ds-title mt-3 text-center text-3xl font-black uppercase tracking-tight text-text-white md:text-5xl">
+        <h2 className="ds-title mt-3 text-center text-2xl font-black uppercase tracking-tight text-text-white sm:text-3xl md:text-4xl lg:text-5xl">
           Monitor All Your
           <br />
           <span className="text-primary">Endpoints</span>
         </h2>
-        <p className="ds-subtitle mt-3 max-w-xl text-center text-xs text-text-secondary md:text-sm">
+        <p className="ds-subtitle mt-2 max-w-xl px-4 text-center text-[11px] text-text-secondary sm:text-xs md:mt-3 md:text-sm">
           Simple dashboard showing service health, response times, and error logs.
           Everything you need to track uptime at a glance.
         </p>
@@ -346,11 +346,11 @@ export function DashboardSection({ isActive }: DashboardSectionProps) {
         </div>
 
         {/* Feature icons row */}
-        <div className="mt-8 flex items-center gap-8 md:gap-12">
+        <div className="mt-6 flex items-center gap-6 md:mt-8 md:gap-8 lg:gap-12">
           {FEATURE_ICONS.map((item) => (
-            <div key={item.label} className="ds-feature-icon flex flex-col items-center gap-1.5">
-              <item.icon className="h-5 w-5 text-text-tertiary" />
-              <span className="text-[8px] font-bold uppercase tracking-widest text-text-tertiary">
+            <div key={item.label} className="ds-feature-icon flex flex-col items-center gap-1">
+              <item.icon className="h-4 w-4 text-text-tertiary md:h-5 md:w-5" />
+              <span className="text-[7px] font-bold uppercase tracking-widest text-text-tertiary md:text-[8px]">
                 {item.label}
               </span>
             </div>
@@ -358,14 +358,14 @@ export function DashboardSection({ isActive }: DashboardSectionProps) {
         </div>
 
         {/* Stats bar */}
-        <div className="mt-6 flex w-full max-w-3xl divide-x divide-primary/20 overflow-hidden rounded-xl border border-primary/20 bg-bg-secondary">
+        <div className="mt-4 flex w-full max-w-3xl divide-x divide-primary/20 overflow-hidden rounded-xl border border-primary/20 bg-bg-secondary md:mt-6">
           {STATS_BAR.map((stat) => (
             <div
               key={stat.label}
-              className="ds-stat flex flex-1 flex-col items-center justify-center py-4"
+              className="ds-stat flex flex-1 flex-col items-center justify-center py-3 md:py-4"
             >
-              <span className="text-2xl font-black text-primary md:text-3xl">{stat.value}</span>
-              <span className="mt-0.5 text-[8px] font-bold uppercase tracking-widest text-text-secondary">
+              <span className="text-xl font-black text-primary md:text-2xl lg:text-3xl">{stat.value}</span>
+              <span className="mt-0.5 text-[7px] font-bold uppercase tracking-widest text-text-secondary md:text-[8px]">
                 {stat.label}
               </span>
             </div>
