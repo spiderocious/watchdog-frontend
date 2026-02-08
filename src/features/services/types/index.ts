@@ -96,6 +96,28 @@ export type ServiceFormData = {
   ssl_verify: boolean
 }
 
+export type UpdateServicePayload = {
+  service_name?: string
+  endpoint_url?: string
+  method?: string
+  check_interval?: number
+  failure_threshold?: number
+  headers?: Record<string, string>
+  body?: string
+  expected_status_codes?: number[]
+}
+
+export type UpdateServiceResponse = {
+  service_id: string
+  service_name: string
+  endpoint_url: string
+  method: string
+  check_interval: number
+  failure_threshold: number
+  status: string
+  updated_at: string
+}
+
 export type DeleteServiceResponse = {
   service_id: string
   deleted_at: string
