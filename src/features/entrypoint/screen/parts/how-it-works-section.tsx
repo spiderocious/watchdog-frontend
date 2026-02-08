@@ -192,33 +192,33 @@ export function HowItWorksSection({ isActive }: HowItWorksSectionProps) {
     >
       <div className="flex w-full max-w-6xl flex-col items-center">
         {/* Header */}
-        <div className="inline-block rounded border border-primary/30 bg-primary/10 px-4 py-1.5">
-          <span className="hw-tag text-[10px] font-bold uppercase tracking-[0.3em] text-primary">
+        <div className="inline-block rounded border border-primary/30 bg-primary/10 px-3 py-1.5 sm:px-4">
+          <span className="hw-tag text-[9px] font-bold uppercase tracking-[0.2em] text-primary sm:text-[10px] sm:tracking-[0.3em]">
             How It Works
           </span>
         </div>
-        <h2 className="hw-title mt-4 text-center text-3xl font-black uppercase tracking-tight text-text-white md:text-5xl lg:text-6xl">
+        <h2 className="hw-title mt-3 text-center text-2xl font-black uppercase tracking-tight text-text-white sm:mt-4 sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl">
           Start Monitoring In{' '}
           <span className="text-primary">3 Simple Steps</span>
         </h2>
-        <p className="mt-3 max-w-lg text-center text-xs text-text-secondary md:text-sm">
+        <p className="mt-2 max-w-lg px-4 text-center text-[11px] text-text-secondary sm:mt-3 sm:text-xs md:text-sm">
           Add endpoints, track uptime, and view metrics in a clean dashboard.
         </p>
 
         {/* Steps */}
-        <div className="relative mt-10 grid w-full grid-cols-1 gap-6 md:grid-cols-3 md:gap-8">
-          {/* Connecting line */}
+        <div className="relative mt-8 grid w-full grid-cols-1 gap-5 sm:mt-10 sm:gap-6 md:grid-cols-3 md:gap-8">
+          {/* Connecting line - hidden on mobile */}
           <div className="step-line absolute left-[16%] right-[16%] top-[32px] hidden h-0.5 origin-left bg-primary/40 md:block" />
 
           {STEPS.map((step) => (
             <div key={step.number} className="step-item flex flex-col items-start md:items-center">
-              <div className="flex h-16 w-16 items-center justify-center rounded-lg border border-primary/30 bg-bg-secondary text-xl font-black text-primary">
+              <div className="flex h-14 w-14 items-center justify-center rounded-lg border border-primary/30 bg-bg-secondary text-lg font-black text-primary sm:h-16 sm:w-16 sm:text-xl">
                 {step.number}
               </div>
-              <h3 className="mt-3 text-sm font-bold uppercase tracking-wider text-text-white">
+              <h3 className="mt-2.5 text-[13px] font-bold uppercase tracking-wider text-text-white sm:mt-3 sm:text-sm">
                 {step.title}
               </h3>
-              <p className="mt-1 text-xs text-text-secondary md:text-center">
+              <p className="mt-1 text-[11px] text-text-secondary sm:text-xs md:text-center">
                 {step.subtitle}
               </p>
             </div>
@@ -226,7 +226,7 @@ export function HowItWorksSection({ isActive }: HowItWorksSectionProps) {
         </div>
 
         {/* Illustration cards */}
-        <div className="mt-8 grid w-full grid-cols-1 gap-4 md:grid-cols-3">
+        <div className="mt-6 grid w-full grid-cols-1 gap-3 sm:mt-8 sm:gap-4 md:grid-cols-3">
           <div className="card-item">
             <TerminalCard />
           </div>
@@ -239,14 +239,14 @@ export function HowItWorksSection({ isActive }: HowItWorksSectionProps) {
         </div>
 
         {/* CTA */}
-        <div className="hw-cta mt-8 flex flex-col items-center gap-3">
+        <div className="hw-cta mt-6 flex flex-col items-center gap-2.5 sm:mt-8 sm:gap-3">
           <Link
             to={ROUTES.AUTH.REGISTER}
-            className="rounded-lg bg-primary px-10 py-3.5 text-[11px] font-bold uppercase tracking-widest text-bg-primary transition-all hover:shadow-[0_0_30px_rgba(0,255,136,0.3)]"
+            className="min-h-11 rounded-lg bg-primary px-8 py-3.5 text-[11px] font-bold uppercase tracking-widest text-bg-primary transition-all hover:shadow-[0_0_30px_rgba(0,255,136,0.3)] sm:px-10"
           >
             Start Monitoring Free
           </Link>
-          <p className="text-[10px] font-bold uppercase tracking-widest text-text-tertiary">
+          <p className="px-4 text-center text-[9px] font-bold uppercase tracking-widest text-text-tertiary sm:text-[10px]">
             No Credit Card Required &bull; Free to Use &bull; Open Source
           </p>
         </div>
