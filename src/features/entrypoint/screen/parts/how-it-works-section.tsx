@@ -163,74 +163,65 @@ function AlertsCard() {
   )
 }
 
-export function HowItWorksSection() {
+type HowItWorksSectionProps = {
+  isActive: boolean
+}
+
+export function HowItWorksSection({ isActive }: HowItWorksSectionProps) {
   const sectionRef = useRef<HTMLDivElement>(null)
   const hasAnimated = useRef(false)
 
   useEffect(() => {
-    if (!sectionRef.current || hasAnimated.current) return
+    if (!isActive || !sectionRef.current || hasAnimated.current) return
+    hasAnimated.current = true
 
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting && !hasAnimated.current) {
-          hasAnimated.current = true
+    const tl = gsap.timeline()
 
-          const tl = gsap.timeline()
-
-          tl.from(sectionRef.current!.querySelector('.hw-tag'), {
-            opacity: 0,
-            y: 20,
-            duration: 0.6,
-            ease: 'power2.out',
-          })
-            .from(
-              sectionRef.current!.querySelector('.hw-title'),
-              { opacity: 0, y: 30, duration: 0.7, ease: 'power2.out' },
-              '-=0.3'
-            )
-            .from(
-              sectionRef.current!.querySelectorAll('.step-item'),
-              {
-                opacity: 0,
-                y: 40,
-                duration: 0.5,
-                stagger: 0.15,
-                ease: 'power2.out',
-              },
-              '-=0.2'
-            )
-            .from(
-              sectionRef.current!.querySelector('.step-line'),
-              { scaleX: 0, duration: 0.8, ease: 'power2.inOut' },
-              '-=0.6'
-            )
-            .from(
-              sectionRef.current!.querySelectorAll('.card-item'),
-              {
-                opacity: 0,
-                y: 50,
-                scale: 0.95,
-                duration: 0.6,
-                stagger: 0.12,
-                ease: 'power2.out',
-              },
-              '-=0.4'
-            )
-            .from(
-              sectionRef.current!.querySelector('.hw-cta'),
-              { opacity: 0, y: 30, duration: 0.6, ease: 'power2.out' },
-              '-=0.2'
-            )
-
-          observer.disconnect()
-        }
-      },
-      { threshold: 0.15 }
-    )
-
-    observer.observe(sectionRef.current)
-    return () => observer.disconnect()
-  }, [])
+    tl.from(sectionRef.current.querySelector('.hw-tag'), {
+      opacity: 0,
+      y: 20,
+      duration: 0.6,
+      ease: 'power2.out',
+    })
+      .from(
+        sectionRef.current.querySelector('.hw-title'),
+        { opacity: 0, y: 30, duration: 0.7, ease: 'power2.out' },
+        '-=0.3'
+      )
+      .from(
+        sectionRef.current.querySelectorAll('.step-item'),
+        {
+          opacity: 0,
+          y: 40,
+          duration: 0.5,
+          stagger: 0.15,
+          ease: 'power2.out',
+        },
+        '-=0.2'
+      )
+      .from(
+        sectionRef.current.querySelector('.step-line'),
+        { scaleX: 0, duration: 0.8, ease: 'power2.inOut' },
+        '-=0.6'
+      )
+      .from(
+        sectionRef.current.querySelectorAll('.card-item'),
+        {
+          opacity: 0,
+          y: 50,
+          scale: 0.95,
+          duration: 0.6,
+          stagger: 0.12,
+          ease: 'power2.out',
+        },
+        '-=0.4'
+      )
+      .from(
+        sectionRef.current.querySelector('.hw-cta'),
+        { opacity: 0, y: 30, duration: 0.6, ease: 'power2.out' },
+        '-=0.2'
+      )
+  }, [isActive])
 
   return (
     <section

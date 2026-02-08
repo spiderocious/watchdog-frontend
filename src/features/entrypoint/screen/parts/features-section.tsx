@@ -164,64 +164,56 @@ const ILLUSTRATION_MAP: Record<FeatureCard['illustration'], React.FC> = {
   code: CodeSvg,
 }
 
-export function FeaturesSection() {
+type FeaturesSectionProps = {
+  isActive: boolean
+}
+
+export function FeaturesSection({ isActive }: FeaturesSectionProps) {
   const sectionRef = useRef<HTMLDivElement>(null)
   const cardsRef = useRef<HTMLDivElement[]>([])
   const ctaRef = useRef<HTMLDivElement>(null)
   const hasAnimated = useRef(false)
 
   useEffect(() => {
-    if (!sectionRef.current || hasAnimated.current) return
+    if (!isActive || !sectionRef.current || hasAnimated.current) return
+    hasAnimated.current = true
 
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting && !hasAnimated.current) {
-          hasAnimated.current = true
-          const tl = gsap.timeline()
+    const tl = gsap.timeline()
 
-          tl.from(sectionRef.current!.querySelector('.section-tag'), {
-            opacity: 0,
-            y: 20,
-            duration: 0.6,
-            ease: 'power2.out',
-          })
-            .from(
-              sectionRef.current!.querySelector('.section-title'),
-              { opacity: 0, y: 30, duration: 0.7, ease: 'power2.out' },
-              '-=0.3'
-            )
-            .from(
-              sectionRef.current!.querySelector('.section-bar'),
-              { scaleX: 0, duration: 0.5, ease: 'power2.out' },
-              '-=0.3'
-            )
-            .from(
-              cardsRef.current.filter(Boolean),
-              {
-                opacity: 0,
-                y: 50,
-                scale: 0.95,
-                duration: 0.6,
-                stagger: 0.1,
-                ease: 'power2.out',
-              },
-              '-=0.2'
-            )
-            .from(
-              ctaRef.current,
-              { opacity: 0, y: 40, duration: 0.7, ease: 'power2.out' },
-              '-=0.2'
-            )
-
-          observer.disconnect()
-        }
-      },
-      { threshold: 0.15 }
-    )
-
-    observer.observe(sectionRef.current)
-    return () => observer.disconnect()
-  }, [])
+    tl.from(sectionRef.current.querySelector('.section-tag'), {
+      opacity: 0,
+      y: 20,
+      duration: 0.6,
+      ease: 'power2.out',
+    })
+      .from(
+        sectionRef.current.querySelector('.section-title'),
+        { opacity: 0, y: 30, duration: 0.7, ease: 'power2.out' },
+        '-=0.3'
+      )
+      .from(
+        sectionRef.current.querySelector('.section-bar'),
+        { scaleX: 0, duration: 0.5, ease: 'power2.out' },
+        '-=0.3'
+      )
+      .from(
+        cardsRef.current.filter(Boolean),
+        {
+          opacity: 0,
+          y: 50,
+          scale: 0.95,
+          duration: 0.6,
+          stagger: 0.1,
+          ease: 'power2.out',
+        },
+        '-=0.2'
+      )
+      .from(
+        ctaRef.current,
+        { opacity: 0, y: 40, duration: 0.7, ease: 'power2.out' },
+        '-=0.2'
+      )
+  }, [isActive])
 
   return (
     <section

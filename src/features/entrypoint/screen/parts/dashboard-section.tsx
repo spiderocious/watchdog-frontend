@@ -199,87 +199,79 @@ const STATS_BAR = [
   { value: '<5s', label: 'Alert Delivery' },
 ]
 
-export function DashboardSection() {
+type DashboardSectionProps = {
+  isActive: boolean
+}
+
+export function DashboardSection({ isActive }: DashboardSectionProps) {
   const sectionRef = useRef<HTMLDivElement>(null)
   const hasAnimated = useRef(false)
 
   useEffect(() => {
-    if (!sectionRef.current || hasAnimated.current) return
+    if (!isActive || !sectionRef.current || hasAnimated.current) return
+    hasAnimated.current = true
 
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting && !hasAnimated.current) {
-          hasAnimated.current = true
+    const el = sectionRef.current
+    const tl = gsap.timeline()
 
-          const tl = gsap.timeline()
+    tl.from(el.querySelector('.ds-tag'), {
+      opacity: 0,
+      y: 20,
+      duration: 0.6,
+      ease: 'power2.out',
+    })
+      .from(
+        el.querySelector('.ds-title'),
+        { opacity: 0, y: 30, duration: 0.7, ease: 'power2.out' },
+        '-=0.3'
+      )
+      .from(
+        el.querySelector('.ds-subtitle'),
+        { opacity: 0, y: 20, duration: 0.5, ease: 'power2.out' },
+        '-=0.3'
+      )
+      .from(
+        el.querySelector('.ds-mockup'),
+        {
+          opacity: 0,
+          y: 60,
+          scale: 0.92,
+          duration: 1,
+          ease: 'power3.out',
+        },
+        '-=0.3'
+      )
 
-          tl.from(sectionRef.current!.querySelector('.ds-tag'), {
-            opacity: 0,
-            y: 20,
-            duration: 0.6,
-            ease: 'power2.out',
-          })
-            .from(
-              sectionRef.current!.querySelector('.ds-title'),
-              { opacity: 0, y: 30, duration: 0.7, ease: 'power2.out' },
-              '-=0.3'
-            )
-            .from(
-              sectionRef.current!.querySelector('.ds-subtitle'),
-              { opacity: 0, y: 20, duration: 0.5, ease: 'power2.out' },
-              '-=0.3'
-            )
-            .from(
-              sectionRef.current!.querySelector('.ds-mockup'),
-              {
-                opacity: 0,
-                y: 60,
-                scale: 0.92,
-                duration: 1,
-                ease: 'power3.out',
-              },
-              '-=0.3'
-            )
+    // Floating badges
+    gsap.from(el.querySelectorAll('.ds-badge'), {
+      opacity: 0,
+      x: -30,
+      duration: 0.6,
+      stagger: 0.15,
+      ease: 'power2.out',
+      delay: 1,
+    })
 
-          // Floating badges
-          gsap.from(sectionRef.current!.querySelectorAll('.ds-badge'), {
-            opacity: 0,
-            x: -30,
-            duration: 0.6,
-            stagger: 0.15,
-            ease: 'power2.out',
-            delay: 1,
-          })
+    // Feature icons
+    gsap.from(el.querySelectorAll('.ds-feature-icon'), {
+      opacity: 0,
+      y: 20,
+      duration: 0.5,
+      stagger: 0.1,
+      ease: 'power2.out',
+      delay: 1.2,
+    })
 
-          // Feature icons
-          gsap.from(sectionRef.current!.querySelectorAll('.ds-feature-icon'), {
-            opacity: 0,
-            y: 20,
-            duration: 0.5,
-            stagger: 0.1,
-            ease: 'power2.out',
-            delay: 1.2,
-          })
-
-          // Stats bar
-          gsap.from(sectionRef.current!.querySelectorAll('.ds-stat'), {
-            opacity: 0,
-            y: 30,
-            duration: 0.5,
-            stagger: 0.12,
-            ease: 'power2.out',
-            delay: 1.5,
-          })
-
-          observer.disconnect()
-        }
-      },
-      { threshold: 0.1 }
-    )
-
-    observer.observe(sectionRef.current)
-    return () => observer.disconnect()
-  }, [])
+    // Stats bar
+    gsap.from(el.querySelectorAll('.ds-stat'), {
+      opacity: 0,
+      y: 30,
+      duration: 0.5,
+      stagger: 0.12,
+      ease: 'power2.out',
+      delay: 1.5,
+    })
+  }, [isActive])
 
   return (
     <section
