@@ -20,8 +20,8 @@ export function SystemHealthMatrix({ services }: SystemHealthMatrixProps) {
         when={services.length > 0}
         fallback={
           <div className="flex h-40 flex-col items-center justify-center gap-3">
-            <Network className="h-8 w-8 text-text-muted/40" />
-            <span className="text-xs uppercase tracking-wider text-text-muted">
+            <Network className="h-8 w-8 text-primary" />
+            <span className="text-sm uppercase tracking-wider text-white">
               No services monitored yet
             </span>
             <Link

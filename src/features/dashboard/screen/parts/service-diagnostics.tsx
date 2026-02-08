@@ -37,11 +37,11 @@ export function ServiceDiagnostics({ checkLogs, services }: ServiceDiagnosticsPr
         when={checkLogs.length > 0}
         fallback={
           <div className="flex h-32 flex-col items-center justify-center gap-3">
-            <Activity className="h-8 w-8 text-text-muted/40" />
-            <span className="text-xs uppercase tracking-wider text-text-muted">
+            <Activity className="h-8 w-8 text-primary" />
+            <span className="text-sm uppercase tracking-wider text-white">
               Awaiting health checks
             </span>
-            <span className="max-w-[220px] text-center text-[10px] leading-relaxed tracking-wider text-text-muted/70">
+            <span className="text-center text-[12px] leading-relaxed tracking-wider text-primary">
               Diagnostics will appear here once your services start running
             </span>
           </div>
