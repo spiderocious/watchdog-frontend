@@ -1,5 +1,6 @@
-import { useState, useEffect } from 'react'
-import { AlertTriangle, Menu } from '@shared/icons/index.ts'
+import { useState, useEffect, useCallback } from 'react'
+import { useQueryClient, useIsFetching } from '@tanstack/react-query'
+import { AlertTriangle, Menu, RefreshCw } from '@shared/icons/index.ts'
 import type { StatusOverview, DashboardMetadata } from '@features/dashboard/types/index.ts'
 
 type TopBarProps = {
@@ -19,11 +20,17 @@ function formatTimestamp(iso: string): string {
 
 export function TopBar({ statusOverview, metadata, onMenuToggle }: TopBarProps) {
   const [now, setNow] = useState(() => new Date().toISOString())
+  const queryClient = useQueryClient()
+  const isFetching = useIsFetching()
 
   useEffect(() => {
     const interval = setInterval(() => setNow(new Date().toISOString()), 1000)
     return () => clearInterval(interval)
   }, [])
+
+  const handleRefresh = useCallback(() => {
+    queryClient.invalidateQueries()
+  }, [queryClient])
 
   const timestamp = metadata?.timestamp ?? now
   const alertCount = (statusOverview?.down ?? 0) + (statusOverview?.warning ?? 0)
@@ -60,6 +67,14 @@ export function TopBar({ statusOverview, metadata, onMenuToggle }: TopBarProps) 
 
       {/* Right */}
       <div className="flex items-center gap-4">
+        <button
+          type="button"
+          onClick={handleRefresh}
+          className="flex h-8 w-8 items-center justify-center rounded-lg text-text-tertiary transition-colors hover:bg-bg-tertiary hover:text-text-secondary"
+        >
+          <RefreshCw className={`h-4 w-4 ${isFetching > 0 ? 'animate-spin' : ''}`} />
+        </button>
+
         {alertCount > 0 && (
           <div className="flex items-center gap-1.5 rounded-full border border-status-error/40 px-3 py-1">
             <AlertTriangle className="h-3 w-3 text-status-error" />

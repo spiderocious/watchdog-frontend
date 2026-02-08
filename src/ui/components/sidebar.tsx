@@ -24,6 +24,34 @@ const NAV_ITEMS: NavItem[] = [
   { icon: Network, path: ROUTES.SERVICES.ROOT, label: 'Services' },
 ]
 
+function SidebarLink({
+  to,
+  label,
+  isActive,
+  children,
+}: {
+  to: string
+  label: string
+  isActive?: boolean
+  children: React.ReactNode
+}) {
+  return (
+    <Link
+      to={to}
+      className={`group relative flex h-10 w-10 items-center justify-center rounded-lg transition-colors ${
+        isActive
+          ? 'bg-primary/10 text-primary'
+          : 'text-text-tertiary hover:bg-bg-tertiary hover:text-text-secondary'
+      }`}
+    >
+      {children}
+      <span className="pointer-events-none absolute left-full z-50 ml-3 whitespace-nowrap rounded border border-border-light bg-bg-secondary px-2.5 py-1.5 text-[10px] font-bold uppercase tracking-wider text-text-primary opacity-0 shadow-lg transition-opacity group-hover:opacity-100">
+        {label}
+      </span>
+    </Link>
+  )
+}
+
 export function Sidebar() {
   const location = useLocation()
 
@@ -33,29 +61,21 @@ export function Sidebar() {
         {NAV_ITEMS.map((item) => {
           const isActive = location.pathname.startsWith(item.path) && item.path !== '#'
           return (
-            <Link
+            <SidebarLink
               key={item.label}
               to={item.path}
-              title={item.label}
-              className={`flex h-10 w-10 items-center justify-center rounded-lg transition-colors ${
-                isActive
-                  ? 'bg-primary/10 text-primary'
-                  : 'text-text-tertiary hover:bg-bg-tertiary hover:text-text-secondary'
-              }`}
+              label={item.label}
+              isActive={isActive}
             >
               <item.icon className="h-5 w-5" />
-            </Link>
+            </SidebarLink>
           )
         })}
       </nav>
 
-      <Link
-        to="#"
-        title="Settings"
-        className="flex h-10 w-10 items-center justify-center rounded-lg text-text-tertiary transition-colors hover:bg-bg-tertiary hover:text-text-secondary"
-      >
+      <SidebarLink to="#" label="Settings">
         <Settings className="h-5 w-5" />
-      </Link>
+      </SidebarLink>
     </aside>
   )
 }
