@@ -1,115 +1,116 @@
-import { useState, useRef, useEffect } from 'react'
-import gsap from 'gsap'
-import { Search, Plus, Mail, MessageSquare, Monitor } from '@icons/index.ts'
+import { useState, useRef, useEffect } from "react";
+import gsap from "gsap";
+import { Search, Plus, Mail, MessageSquare, Monitor } from "@icons/index.ts";
+import { Hidden } from "meemaw";
 
-type FaqCategory = 'all' | 'pricing' | 'technical' | 'security'
+type FaqCategory = "all" | "pricing" | "technical" | "security";
 
 type FaqItem = {
-  question: string
-  answer: string
-  categories: FaqCategory[]
-}
+  question: string;
+  answer: string;
+  categories: FaqCategory[];
+};
 
 const FAQ_ITEMS: FaqItem[] = [
   {
-    question: 'What protocols can I monitor?',
+    question: "What protocols can I monitor?",
     answer:
-      'Monitor Central supports HTTP and HTTPS endpoints. You can configure GET, POST, PUT, DELETE, and other HTTP methods with custom headers and request bodies.',
-    categories: ['technical'],
+      "Monitor Central supports HTTP and HTTPS endpoints. You can configure GET, POST, PUT, DELETE, and other HTTP methods with custom headers and request bodies.",
+    categories: ["technical"],
   },
   {
-    question: 'How often are health checks performed?',
+    question: "How often are health checks performed?",
     answer:
-      'You can configure check intervals per service, with a minimum of 30 seconds. Each service is checked independently at your chosen interval.',
-    categories: ['technical'],
+      "You can configure check intervals per service, with a minimum of 30 seconds. Each service is checked independently at your chosen interval.",
+    categories: ["technical"],
   },
   {
-    question: 'What metrics are tracked?',
+    question: "What metrics are tracked?",
     answer:
-      'For each service, we track uptime percentage, average response time, status codes, success/failure counts, and maintain a complete log of all health checks with timestamps.',
-    categories: ['technical'],
+      "For each service, we track uptime percentage, average response time, status codes, success/failure counts, and maintain a complete log of all health checks with timestamps.",
+    categories: ["technical"],
   },
   {
-    question: 'Does it support alerts or notifications?',
+    question: "Does it support alerts or notifications?",
     answer:
-      'Alert functionality is currently not implemented. The dashboard provides real-time visibility into service health, response times, and error logs.',
-    categories: ['pricing', 'technical'],
+      "Alert functionality is currently not implemented. The dashboard provides real-time visibility into service health, response times, and error logs.",
+    categories: ["pricing", "technical"],
   },
-]
+];
 
 const CATEGORIES: { label: string; value: FaqCategory }[] = [
-  { label: 'All', value: 'all' },
-  { label: 'Pricing', value: 'pricing' },
-  { label: 'Technical', value: 'technical' },
-  { label: 'Security', value: 'security' },
-]
+  { label: "All", value: "all" },
+  { label: "Pricing", value: "pricing" },
+  { label: "Technical", value: "technical" },
+  { label: "Security", value: "security" },
+];
 
 type FaqSectionProps = {
-  isActive: boolean
-}
+  isActive: boolean;
+};
 
 export function FaqSection({ isActive }: FaqSectionProps) {
-  const sectionRef = useRef<HTMLDivElement>(null)
-  const hasAnimated = useRef(false)
-  const [activeCategory, setActiveCategory] = useState<FaqCategory>('all')
-  const [openIndex, setOpenIndex] = useState<number | null>(0)
-  const [searchQuery, setSearchQuery] = useState('')
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const hasAnimated = useRef(false);
+  const [activeCategory, setActiveCategory] = useState<FaqCategory>("all");
+  const [openIndex, setOpenIndex] = useState<number | null>(0);
+  const [searchQuery, setSearchQuery] = useState("");
 
   const filteredItems = FAQ_ITEMS.filter((item) => {
     const matchesCategory =
-      activeCategory === 'all' || item.categories.includes(activeCategory)
+      activeCategory === "all" || item.categories.includes(activeCategory);
     const matchesSearch =
-      searchQuery === '' ||
+      searchQuery === "" ||
       item.question.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      item.answer.toLowerCase().includes(searchQuery.toLowerCase())
-    return matchesCategory && matchesSearch
-  })
+      item.answer.toLowerCase().includes(searchQuery.toLowerCase());
+    return matchesCategory && matchesSearch;
+  });
 
   useEffect(() => {
-    if (!isActive || !sectionRef.current || hasAnimated.current) return
-    hasAnimated.current = true
+    if (!isActive || !sectionRef.current || hasAnimated.current) return;
+    hasAnimated.current = true;
 
-    const el = sectionRef.current
-    const tl = gsap.timeline()
+    const el = sectionRef.current;
+    const tl = gsap.timeline();
 
-    tl.from(el.querySelector('.faq-badge'), {
+    tl.from(el.querySelector(".faq-badge"), {
       opacity: 0,
       y: 20,
       duration: 0.5,
-      ease: 'power2.out',
+      ease: "power2.out",
     })
       .from(
-        el.querySelector('.faq-title'),
-        { opacity: 0, y: 30, duration: 0.6, ease: 'power2.out' },
-        '-=0.2'
+        el.querySelector(".faq-title"),
+        { opacity: 0, y: 30, duration: 0.6, ease: "power2.out" },
+        "-=0.2",
       )
       .from(
-        el.querySelector('.faq-search'),
-        { opacity: 0, y: 20, duration: 0.5, ease: 'power2.out' },
-        '-=0.2'
+        el.querySelector(".faq-search"),
+        { opacity: 0, y: 20, duration: 0.5, ease: "power2.out" },
+        "-=0.2",
       )
       .from(
-        el.querySelector('.faq-tabs'),
-        { opacity: 0, y: 15, duration: 0.4, ease: 'power2.out' },
-        '-=0.2'
+        el.querySelector(".faq-tabs"),
+        { opacity: 0, y: 15, duration: 0.4, ease: "power2.out" },
+        "-=0.2",
       )
       .from(
-        el.querySelectorAll('.faq-item'),
+        el.querySelectorAll(".faq-item"),
         {
           opacity: 0,
           y: 30,
           duration: 0.5,
           stagger: 0.08,
-          ease: 'power2.out',
+          ease: "power2.out",
         },
-        '-=0.2'
+        "-=0.2",
       )
       .from(
-        el.querySelector('.faq-support'),
-        { opacity: 0, y: 30, duration: 0.5, ease: 'power2.out' },
-        '-=0.2'
-      )
-  }, [isActive])
+        el.querySelector(".faq-support"),
+        { opacity: 0, y: 30, duration: 0.5, ease: "power2.out" },
+        "-=0.2",
+      );
+  }, [isActive]);
 
   return (
     <section
@@ -139,7 +140,9 @@ export function FaqSection({ isActive }: FaqSectionProps) {
             className="flex-1 bg-transparent text-xs font-medium tracking-wider text-text-white placeholder:text-text-tertiary focus:outline-none"
           />
           <div className="hidden items-center gap-0.5 rounded border border-border-light px-1.5 py-0.5 sm:flex">
-            <span className="text-[9px] font-bold text-text-tertiary">CMD +</span>
+            <span className="text-[9px] font-bold text-text-tertiary">
+              CMD +
+            </span>
             <span className="text-[9px] font-bold text-text-tertiary">K</span>
           </div>
         </div>
@@ -153,8 +156,8 @@ export function FaqSection({ isActive }: FaqSectionProps) {
               onClick={() => setActiveCategory(cat.value)}
               className={`rounded-lg border px-4 py-1.5 text-[10px] font-bold uppercase tracking-widest transition-all ${
                 activeCategory === cat.value
-                  ? 'border-primary bg-primary/15 text-primary'
-                  : 'border-border-light bg-transparent text-text-secondary hover:border-border-hover hover:text-text-white'
+                  ? "border-primary bg-primary/15 text-primary"
+                  : "border-border-light bg-transparent text-text-secondary hover:border-border-hover hover:text-text-white"
               }`}
             >
               {cat.label}
@@ -165,7 +168,7 @@ export function FaqSection({ isActive }: FaqSectionProps) {
         {/* Accordion items */}
         <div className="mt-6 w-full space-y-2">
           {filteredItems.map((item, i) => {
-            const isOpen = openIndex === i
+            const isOpen = openIndex === i;
 
             return (
               <div
@@ -182,14 +185,14 @@ export function FaqSection({ isActive }: FaqSectionProps) {
                   </span>
                   <Plus
                     className={`h-4 w-4 flex-shrink-0 text-primary transition-transform duration-300 ${
-                      isOpen ? 'rotate-45' : ''
+                      isOpen ? "rotate-45" : ""
                     }`}
                   />
                 </button>
                 <div
                   className="overflow-hidden transition-all duration-300"
                   style={{
-                    maxHeight: isOpen ? '200px' : '0',
+                    maxHeight: isOpen ? "200px" : "0",
                     opacity: isOpen ? 1 : 0,
                   }}
                 >
@@ -198,49 +201,46 @@ export function FaqSection({ isActive }: FaqSectionProps) {
                   </p>
                 </div>
               </div>
-            )
+            );
           })}
         </div>
 
         {/* Support CTA */}
-        <div className="faq-support mt-6 flex w-full flex-col items-center justify-between gap-4 rounded-lg border border-border-light bg-bg-secondary p-5 sm:flex-row">
-          <div>
-            <h3 className="text-sm font-bold uppercase tracking-wider text-text-white">
-              Need Help?
-            </h3>
-            <p className="mt-1 text-[10px] uppercase tracking-widest text-text-secondary">
-              Check our docs or open an issue on GitHub.
-            </p>
+        <Hidden when={true}>
+          <div className="faq-support mt-6 flex w-full flex-col items-center justify-between gap-4 rounded-lg border border-border-light bg-bg-secondary p-5 sm:flex-row">
+            <div>
+              <h3 className="text-sm font-bold uppercase tracking-wider text-text-white">
+                Need Help?
+              </h3>
+              <p className="mt-1 text-[10px] uppercase tracking-widest text-text-secondary">
+                Check our docs or open an issue on GitHub.
+              </p>
+            </div>
+            <div className="flex items-center gap-3">
+              <button
+                type="button"
+                className="flex items-center gap-2 rounded-lg border border-primary bg-primary/10 px-5 py-2.5 text-[10px] font-bold uppercase tracking-widest text-primary transition-all hover:bg-primary hover:text-bg-primary"
+              >
+                <Mail className="h-3.5 w-3.5" />
+                Email Support
+              </button>
+              <button
+                type="button"
+                className="flex items-center gap-2 rounded-lg border border-border-light px-5 py-2.5 text-[10px] font-bold uppercase tracking-widest text-text-secondary transition-all hover:border-border-hover hover:text-text-white"
+              >
+                <MessageSquare className="h-3.5 w-3.5" />
+                Live Chat
+              </button>
+            </div>
           </div>
-          <div className="flex items-center gap-3">
-            <button
-              type="button"
-              className="flex items-center gap-2 rounded-lg border border-primary bg-primary/10 px-5 py-2.5 text-[10px] font-bold uppercase tracking-widest text-primary transition-all hover:bg-primary hover:text-bg-primary"
-            >
-              <Mail className="h-3.5 w-3.5" />
-              Email Support
-            </button>
-            <button
-              type="button"
-              className="flex items-center gap-2 rounded-lg border border-border-light px-5 py-2.5 text-[10px] font-bold uppercase tracking-widest text-text-secondary transition-all hover:border-border-hover hover:text-text-white"
-            >
-              <MessageSquare className="h-3.5 w-3.5" />
-              Live Chat
-            </button>
-          </div>
-        </div>
-
+        </Hidden>
         {/* Footer bar */}
         <div className="mt-4 flex w-full items-center justify-between text-[8px] uppercase tracking-widest text-text-tertiary">
-          <span>
-            Monitor Central v1.0
-          </span>
+          <span>WatchDog v1.0</span>
           <span>Open Source</span>
-          <span className="hidden sm:block">
-            MIT License
-          </span>
+          <span className="hidden sm:block">MIT License</span>
         </div>
       </div>
     </section>
-  )
+  );
 }

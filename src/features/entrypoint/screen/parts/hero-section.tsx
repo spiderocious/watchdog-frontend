@@ -125,13 +125,6 @@ export function HeroSection({ onScrollDown }: HeroSectionProps) {
               Start Monitoring Free
               <ArrowRight className="h-4 w-4" />
             </Link>
-            <Link
-              to={ROUTES.DASHBOARD}
-              className="flex items-center gap-3 rounded-lg border border-border-light px-6 py-4 text-[11px] font-bold uppercase tracking-wider text-text-secondary transition-colors hover:border-border-hover hover:text-text-white sm:px-8"
-            >
-              <Play className="h-4 w-4" />
-              View Live Demo
-            </Link>
           </div>
 
           {/* Trust badges */}
