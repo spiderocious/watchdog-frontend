@@ -32,8 +32,7 @@ export function RegistrationForm() {
     full_name: '',
     email: '',
     password: '',
-    confirm_password: '',
-    accepted_terms: false,
+    confirm_password: ''
   })
 
   const passwordsMatch =
@@ -47,8 +46,7 @@ export function RegistrationForm() {
     formData.full_name.trim().length >= 2 &&
     formData.email.includes('@') &&
     formData.password.length >= 8 &&
-    passwordsMatch &&
-    formData.accepted_terms
+    passwordsMatch
 
   function updateField<K extends keyof RegisterFormData>(
     key: K,
@@ -102,14 +100,14 @@ export function RegistrationForm() {
       {/* Header */}
       <div className="mb-1 flex items-start justify-between gap-4">
         <h1 className="text-2xl font-bold uppercase tracking-wide text-text-white">
-          Operator Registration
+          Signup
         </h1>
         <span className="mt-1 whitespace-nowrap text-[11px] uppercase tracking-wider text-primary">
-          ID_SECURE_PROTO_V3
+          WatchDog
         </span>
       </div>
       <p className="mb-8 text-sm text-text-secondary">
-        Provision a new operator profile for regional sector monitoring.
+        Create an account to monitor your systems and receive real-time alerts on WatchDog.
       </p>
 
       {/* Global error */}
@@ -242,38 +240,6 @@ export function RegistrationForm() {
           </Show>
         </div>
 
-        {/* Terms */}
-        <label className="flex cursor-pointer items-start gap-3">
-          <input
-            type="checkbox"
-            checked={formData.accepted_terms}
-            onChange={(e) => updateField('accepted_terms', e.target.checked)}
-            className="sr-only"
-          />
-          <div
-            className={`mt-0.5 flex h-4 w-4 flex-shrink-0 items-center justify-center rounded border transition-colors ${
-              formData.accepted_terms
-                ? 'border-primary bg-primary'
-                : 'border-border-light bg-bg-primary'
-            }`}
-          >
-            <Show when={formData.accepted_terms}>
-              <Check className="h-3 w-3 text-primary-text" />
-            </Show>
-          </div>
-          <span className="text-xs leading-relaxed text-text-secondary">
-            I confirm my identity as a licensed systems operator and agree to the{' '}
-            <a href="#" className="text-primary underline hover:text-primary-hover">
-              System Protocols
-            </a>{' '}
-            and{' '}
-            <a href="#" className="text-primary underline hover:text-primary-hover">
-              Data Encryption Policies
-            </a>
-            .
-          </span>
-        </label>
-
         {/* Submit */}
         <button
           type="submit"
@@ -289,7 +255,7 @@ export function RegistrationForm() {
               </>
             }
           >
-            Continue to Profile Setup
+            Signup
           </Show>
         </button>
 

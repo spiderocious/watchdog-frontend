@@ -9,7 +9,6 @@ export type RegisterFormData = {
   email: string
   password: string
   confirm_password: string
-  accepted_terms: boolean
 }
 
 export type PasswordRequirement = {
