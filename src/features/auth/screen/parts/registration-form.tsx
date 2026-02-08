@@ -15,7 +15,6 @@ import { ROUTES } from '@shared/constants/routes.ts'
 import type { ApiErrorResponse } from '@shared/types/index.ts'
 import type { RegisterFormData } from '../../types/index.ts'
 import { useRegisterMutation } from '../../api/use-register-mutation.ts'
-import { usePasswordStrength } from '../../hooks/use-password-strength.ts'
 import { PasswordStrength } from './password-strength.tsx'
 
 const INPUT_BASE =
@@ -37,7 +36,6 @@ export function RegistrationForm() {
     accepted_terms: false,
   })
 
-  const { isStrong } = usePasswordStrength(formData.password)
   const passwordsMatch =
     formData.confirm_password.length > 0 &&
     formData.password === formData.confirm_password
@@ -60,7 +58,7 @@ export function RegistrationForm() {
   }
 
   function getFieldError(fieldPath: string): string | undefined {
-    const error = mutation.error as ApiErrorResponse | undefined
+    const error = mutation.error as unknown as ApiErrorResponse | undefined
     if (!error) return undefined
     if (error.error === 'EMAIL_TAKEN' && fieldPath === 'email') {
       return error.message
@@ -71,7 +69,7 @@ export function RegistrationForm() {
   }
 
   function getGlobalError(): string | undefined {
-    const error = mutation.error as ApiErrorResponse | undefined
+    const error = mutation.error as unknown as ApiErrorResponse | undefined
     if (!error) return undefined
     if (error.error === 'EMAIL_TAKEN') return undefined
     if (error.error === 'VALIDATION_ERROR') return undefined
