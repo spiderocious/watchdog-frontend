@@ -30,17 +30,17 @@ export function LandingNavbar({ onNavigateSection }: LandingNavbarProps) {
         </button>
         <button
           type="button"
-          onClick={() => onNavigateSection?.(2)}
-          className="text-[11px] font-bold uppercase tracking-widest text-text-secondary transition-colors hover:text-text-white"
-        >
-          Docs
-        </button>
-        <button
-          type="button"
           onClick={() => onNavigateSection?.(3)}
           className="text-[11px] font-bold uppercase tracking-widest text-text-secondary transition-colors hover:text-text-white"
         >
-          Pricing
+          Dashboard
+        </button>
+        <button
+          type="button"
+          onClick={() => onNavigateSection?.(5)}
+          className="text-[11px] font-bold uppercase tracking-widest text-text-secondary transition-colors hover:text-text-white"
+        >
+          FAQ
         </button>
       </nav>
 

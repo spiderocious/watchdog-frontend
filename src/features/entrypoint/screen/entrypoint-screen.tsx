@@ -3,8 +3,14 @@ import gsap from 'gsap'
 import { GridBackground } from './parts/grid-background.tsx'
 import { LandingNavbar } from './parts/landing-navbar.tsx'
 import { HeroSection } from './parts/hero-section.tsx'
+import { FeaturesSection } from './parts/features-section.tsx'
+import { HowItWorksSection } from './parts/how-it-works-section.tsx'
+import { DashboardSection } from './parts/dashboard-section.tsx'
+import { StatsSection } from './parts/stats-section.tsx'
+import { FaqSection } from './parts/faq-section.tsx'
+import { FooterSection } from './parts/footer-section.tsx'
 
-const SECTIONS = ['hero'] as const
+const SECTIONS = ['hero', 'features', 'how-it-works', 'dashboard', 'stats', 'faq', 'footer'] as const
 
 export function EntrypointScreen() {
   const containerRef = useRef<HTMLDivElement>(null)
@@ -88,7 +94,12 @@ export function EntrypointScreen() {
 
       <div ref={containerRef} className="relative z-10">
         <HeroSection onScrollDown={navigateNext} />
-        {/* Future sections will be added here */}
+        <FeaturesSection />
+        <HowItWorksSection />
+        <DashboardSection />
+        <StatsSection />
+        <FaqSection />
+        <FooterSection />
       </div>
     </main>
   )
