@@ -40,6 +40,7 @@ export function useDeleteService() {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['services-list'] })
+      queryClient.invalidateQueries({ queryKey: ['service-detail'] })
       queryClient.invalidateQueries({ queryKey: ['dashboard-overview'] })
     },
   })
@@ -58,6 +59,7 @@ export function usePauseService() {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['services-list'] })
+      queryClient.invalidateQueries({ queryKey: ['service-detail'] })
       queryClient.invalidateQueries({ queryKey: ['dashboard-overview'] })
     },
   })
@@ -76,6 +78,7 @@ export function useResumeService() {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['services-list'] })
+      queryClient.invalidateQueries({ queryKey: ['service-detail'] })
       queryClient.invalidateQueries({ queryKey: ['dashboard-overview'] })
     },
   })

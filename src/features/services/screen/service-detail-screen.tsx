@@ -1,7 +1,9 @@
+import { useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { Show } from 'meemaw'
 import { Loader2, AlertTriangle } from '@icons/index.ts'
 import { ROUTES } from '@shared/constants/routes.ts'
+import { ConfirmDialog } from '@ui/components/index.ts'
 import { useServiceDetail } from '../api/use-service-detail.ts'
 import {
   useDeleteService,
@@ -19,15 +21,18 @@ export function ServiceDetailScreen() {
   const navigate = useNavigate()
   const { data, isLoading, isError } = useServiceDetail(service_id ?? '')
 
+  const [deleteConfirmOpen, setDeleteConfirmOpen] = useState(false)
+
   const deleteMutation = useDeleteService()
   const pauseMutation = usePauseService()
   const resumeMutation = useResumeService()
 
-  function handleDelete() {
+  function handleDeleteConfirm() {
     if (!service_id) return
     deleteMutation.mutate(service_id, {
       onSuccess: () => navigate(ROUTES.SERVICES.ROOT),
     })
+    setDeleteConfirmOpen(false)
   }
 
   function handlePause() {
@@ -66,7 +71,7 @@ export function ServiceDetailScreen() {
                 service={data.service}
                 onPause={handlePause}
                 onResume={handleResume}
-                onDelete={handleDelete}
+                onDelete={() => setDeleteConfirmOpen(true)}
               />
 
               <DetailMetrics metrics={data.quick_metrics} />
@@ -80,6 +85,16 @@ export function ServiceDetailScreen() {
                 />
                 <IncidentHistory errors={data.errors} />
               </div>
+
+              <ConfirmDialog
+                open={deleteConfirmOpen}
+                title="Delete Service"
+                message={`This will permanently delete "${data.service.name}" and all its health check history. This action cannot be undone.`}
+                confirmLabel="Delete"
+                confirmColor="error"
+                onConfirm={handleDeleteConfirm}
+                onCancel={() => setDeleteConfirmOpen(false)}
+              />
             </>
           )
         })()}
