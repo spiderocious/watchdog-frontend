@@ -23,3 +23,14 @@ export type PasswordStrengthLevel =
   | 'MODERATE'
   | 'STRONG'
   | 'MAXIMUM'
+
+export type LoginPayload = {
+  email: string
+  password: string
+}
+
+export type LoginFormData = {
+  email: string
+  password: string
+  remember_me: boolean
+}
