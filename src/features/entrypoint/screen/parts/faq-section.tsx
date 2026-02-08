@@ -119,13 +119,13 @@ export function FaqSection({ isActive }: FaqSectionProps) {
     >
       <div className="flex w-full max-w-3xl flex-col items-center">
         {/* Header */}
-        <div className="faq-badge flex items-center gap-2 text-primary">
-          <Monitor className="h-4 w-4" />
-          <span className="text-[10px] font-bold uppercase tracking-[0.3em]">
+        <div className="faq-badge flex items-center gap-1.5 text-primary sm:gap-2">
+          <Monitor className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
+          <span className="text-[9px] font-bold uppercase tracking-[0.2em] sm:text-[10px] sm:tracking-[0.3em]">
             Monitor Central // FAQ
           </span>
         </div>
-        <h2 className="faq-title mt-3 text-center text-3xl font-black uppercase tracking-tight text-text-white md:text-5xl">
+        <h2 className="faq-title mt-2.5 text-center text-2xl font-black uppercase tracking-tight text-text-white sm:mt-3 sm:text-3xl md:text-4xl lg:text-5xl">
           Frequently Asked <span className="text-primary">Questions</span>
         </h2>
 
