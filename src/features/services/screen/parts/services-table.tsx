@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Show } from 'meemaw'
 import { Eye, Edit3, MoreVertical, Pause, Play, Trash2 } from '@icons/index.ts'
+import { ConfirmDialog } from '@ui/components/index.ts'
 import type { ServiceItem } from '../../types/index.ts'
 
 type ServicesTableProps = {
@@ -68,6 +69,7 @@ function ActionsMenu({
   onDelete: (id: string) => void
 }) {
   const [open, setOpen] = useState(false)
+  const [confirmDelete, setConfirmDelete] = useState(false)
 
   return (
     <div className="relative">
@@ -107,7 +109,7 @@ function ActionsMenu({
           </Show>
           <button
             type="button"
-            onClick={() => { onDelete(service.id); setOpen(false) }}
+            onClick={() => { setOpen(false); setConfirmDelete(true) }}
             className="flex w-full items-center gap-2 px-3 py-1.5 text-[10px] uppercase tracking-wider text-status-error transition-colors hover:bg-bg-tertiary"
           >
             <Trash2 className="h-3 w-3" />
@@ -115,6 +117,16 @@ function ActionsMenu({
           </button>
         </div>
       </Show>
+
+      <ConfirmDialog
+        open={confirmDelete}
+        title="Delete Service"
+        message={`This will permanently delete "${service.name}" and all its health check history. This action cannot be undone.`}
+        confirmLabel="Delete"
+        confirmColor="error"
+        onConfirm={() => { onDelete(service.id); setConfirmDelete(false) }}
+        onCancel={() => setConfirmDelete(false)}
+      />
     </div>
   )
 }
