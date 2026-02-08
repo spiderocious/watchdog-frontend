@@ -130,14 +130,14 @@ export function FaqSection({ isActive }: FaqSectionProps) {
         </h2>
 
         {/* Search */}
-        <div className="faq-search mt-6 flex w-full items-center gap-3 rounded-lg border border-border-light bg-bg-secondary px-4 py-3">
-          <Search className="h-4 w-4 flex-shrink-0 text-text-tertiary" />
+        <div className="faq-search mt-4 flex w-full items-center gap-2 rounded-lg border border-border-light bg-bg-secondary px-3 py-2.5 sm:mt-6 sm:gap-3 sm:px-4 sm:py-3">
+          <Search className="h-3.5 w-3.5 shrink-0 text-text-tertiary sm:h-4 sm:w-4" />
           <input
             type="text"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="Search questions..."
-            className="flex-1 bg-transparent text-xs font-medium tracking-wider text-text-white placeholder:text-text-tertiary focus:outline-none"
+            className="flex-1 bg-transparent text-[11px] font-medium tracking-wider text-text-white placeholder:text-text-tertiary focus:outline-none sm:text-xs"
           />
           <div className="hidden items-center gap-0.5 rounded border border-border-light px-1.5 py-0.5 sm:flex">
             <span className="text-[9px] font-bold text-text-tertiary">
@@ -148,13 +148,13 @@ export function FaqSection({ isActive }: FaqSectionProps) {
         </div>
 
         {/* Category tabs */}
-        <div className="faq-tabs mt-4 flex items-center gap-2">
+        <div className="faq-tabs mt-3 flex w-full items-center gap-1.5 overflow-x-auto sm:mt-4 sm:w-auto sm:gap-2">
           {CATEGORIES.map((cat) => (
             <button
               key={cat.value}
               type="button"
               onClick={() => setActiveCategory(cat.value)}
-              className={`rounded-lg border px-4 py-1.5 text-[10px] font-bold uppercase tracking-widest transition-all ${
+              className={`shrink-0 rounded-lg border px-3 py-1.5 text-[9px] font-bold uppercase tracking-widest transition-all sm:px-4 sm:text-[10px] ${
                 activeCategory === cat.value
                   ? "border-primary bg-primary/15 text-primary"
                   : "border-border-light bg-transparent text-text-secondary hover:border-border-hover hover:text-text-white"
@@ -166,7 +166,7 @@ export function FaqSection({ isActive }: FaqSectionProps) {
         </div>
 
         {/* Accordion items */}
-        <div className="mt-6 w-full space-y-2">
+        <div className="mt-4 w-full space-y-2 sm:mt-6">
           {filteredItems.map((item, i) => {
             const isOpen = openIndex === i;
 
@@ -178,13 +178,13 @@ export function FaqSection({ isActive }: FaqSectionProps) {
                 <button
                   type="button"
                   onClick={() => setOpenIndex(isOpen ? null : i)}
-                  className="flex w-full items-center justify-between px-5 py-4 text-left"
+                  className="min-h-11 flex w-full items-center justify-between gap-3 px-4 py-3 text-left sm:px-5 sm:py-4"
                 >
-                  <span className="text-xs font-bold uppercase tracking-wider text-text-white md:text-sm">
+                  <span className="text-[11px] font-bold uppercase tracking-wider text-text-white sm:text-xs md:text-sm">
                     {item.question}
                   </span>
                   <Plus
-                    className={`h-4 w-4 flex-shrink-0 text-primary transition-transform duration-300 ${
+                    className={`h-4 w-4 shrink-0 text-primary transition-transform duration-300 ${
                       isOpen ? "rotate-45" : ""
                     }`}
                   />
@@ -196,7 +196,7 @@ export function FaqSection({ isActive }: FaqSectionProps) {
                     opacity: isOpen ? 1 : 0,
                   }}
                 >
-                  <p className="px-5 pb-4 text-xs leading-relaxed text-text-secondary">
+                  <p className="px-4 pb-3 text-[11px] leading-relaxed text-text-secondary sm:px-5 sm:pb-4 sm:text-xs">
                     {item.answer}
                   </p>
                 </div>
@@ -235,7 +235,7 @@ export function FaqSection({ isActive }: FaqSectionProps) {
           </div>
         </Hidden>
         {/* Footer bar */}
-        <div className="mt-4 flex w-full items-center justify-between text-[8px] uppercase tracking-widest text-text-tertiary">
+        <div className="mt-3 flex w-full items-center justify-between text-[7px] uppercase tracking-widest text-text-tertiary sm:mt-4 sm:text-[8px]">
           <span>WatchDog v1.0</span>
           <span>Open Source</span>
           <span className="hidden sm:block">MIT License</span>
