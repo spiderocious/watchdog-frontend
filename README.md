@@ -2,6 +2,9 @@
 
 Real-time uptime monitoring dashboard built with React 19 and a SCADA-inspired industrial dark theme. Connects to the WatchDog backend API for service health monitoring, alerting, and diagnostics.
 
+<img width="1600" height="1280" alt="image" src="https://github.com/user-attachments/assets/2ea95188-67a0-44f1-9280-d00602b7678b" />
+
+
 ## Links
 - [Live Demo](https://watchdog.devferanmi.xyz/)
 - [GitHub Repository](https://github.com/spiderocious/watchdog-frontend)
