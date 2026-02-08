@@ -5,11 +5,11 @@ import { ArrowRight, Play, Shield, CheckCircle, Lock, ChevronDown } from '@icons
 import { ROUTES } from '@shared/constants/routes.ts'
 
 const TERMINAL_LINES = [
-  { type: 'command', text: '$ monitor --start --region=us-east-1' },
-  { type: 'info', text: 'Initializing clusters... [OK]' },
-  { type: 'success', label: '[SUCCESS]', text: 'Database Cluster (PG-01)', metric: '12ms' },
-  { type: 'success', label: '[SUCCESS]', text: 'Redis Cache Layer', metric: '4ms' },
-  { type: 'error', label: '', text: 'Payment Gateway Service', metric: '503 ERROR' },
+  { type: 'command', text: '$ watchdog add https://api.example.com/health' },
+  { type: 'info', text: 'Testing connection... [OK]' },
+  { type: 'success', label: '[200]', text: 'Production API', metric: '142ms' },
+  { type: 'success', label: '[200]', text: 'Staging API', metric: '89ms' },
+  { type: 'error', label: '[503]', text: 'Payment Service', metric: 'DOWN' },
 ] as const
 
 type HeroSectionProps = {
@@ -97,7 +97,7 @@ export function HeroSection({ onScrollDown }: HeroSectionProps) {
           <div data-hero-tag className="flex items-center gap-2">
             <span className="text-primary">&#9889;</span>
             <span className="text-[10px] font-bold uppercase tracking-widest text-primary">
-              Real-Time Infrastructure Monitoring
+              Simple Uptime Monitoring
             </span>
           </div>
 
@@ -105,16 +105,16 @@ export function HeroSection({ onScrollDown }: HeroSectionProps) {
             data-hero-headline
             className="text-5xl font-black uppercase leading-[0.95] tracking-tight text-text-white sm:text-6xl md:text-7xl lg:text-8xl"
           >
-            Never Miss A Downtime Again
+            Monitor Your Endpoints With Ease
           </h1>
 
           <p
             data-hero-subtitle
             className="max-w-lg text-sm leading-relaxed tracking-wide text-text-secondary sm:text-base"
           >
-            Enterprise-grade infrastructure monitoring with millisecond
-            precision and automated incident response. Designed for
-            teams that demand zero-latency visibility.
+            Track uptime and response times for your HTTP endpoints.
+            Clean dashboard, real-time monitoring, and zero hassle.
+            Perfect for developers who need straightforward visibility.
           </p>
 
           <div data-hero-cta className="flex flex-wrap items-center gap-4">
@@ -140,21 +140,21 @@ export function HeroSection({ onScrollDown }: HeroSectionProps) {
             className="flex flex-wrap items-center gap-6 pt-4"
           >
             <div className="flex items-center gap-2">
-              <Shield className="h-4 w-4 text-text-secondary" />
+              <CheckCircle className="h-4 w-4 text-text-secondary" />
               <span className="text-[10px] font-bold uppercase tracking-widest text-text-secondary">
-                SOC2 Type II
+                Free to Start
               </span>
             </div>
             <div className="flex items-center gap-2">
-              <CheckCircle className="h-4 w-4 text-text-secondary" />
+              <Shield className="h-4 w-4 text-text-secondary" />
               <span className="text-[10px] font-bold uppercase tracking-widest text-text-secondary">
-                99.99% SLA
+                Open Source
               </span>
             </div>
             <div className="flex items-center gap-2">
               <Lock className="h-4 w-4 text-text-secondary" />
               <span className="text-[10px] font-bold uppercase tracking-widest text-text-secondary">
-                TLS 1.3 Ready
+                Self Hosted
               </span>
             </div>
           </div>
@@ -177,7 +177,7 @@ export function HeroSection({ onScrollDown }: HeroSectionProps) {
               <div className="flex items-center gap-1.5">
                 <div className="h-1.5 w-1.5 rounded-full bg-status-success" />
                 <span className="text-[9px] font-bold uppercase tracking-widest text-status-success">
-                  Live System Status
+                  Live Monitoring
                 </span>
               </div>
             </div>
@@ -215,15 +215,15 @@ export function HeroSection({ onScrollDown }: HeroSectionProps) {
             </div>
           </div>
 
-          {/* Floating stat: Total Checks */}
+          {/* Floating stat: Services */}
           <div
             data-hero-stat
             className="absolute -right-4 top-0 rounded-lg border border-border-light bg-bg-secondary/90 px-4 py-3 shadow-lg backdrop-blur-sm"
           >
             <span className="text-[9px] font-bold uppercase tracking-widest text-primary">
-              Total Checks
+              Active Services
             </span>
-            <p className="font-mono text-2xl font-bold text-text-white">2.4M</p>
+            <p className="font-mono text-2xl font-bold text-text-white">3</p>
           </div>
 
           {/* Floating stat: Avg Response */}
@@ -247,7 +247,7 @@ export function HeroSection({ onScrollDown }: HeroSectionProps) {
             <span className="text-[9px] font-bold uppercase tracking-widest text-text-secondary">
               Uptime
             </span>
-            <p className="font-mono text-2xl font-bold text-text-white">99.98%</p>
+            <p className="font-mono text-2xl font-bold text-text-white">99.2%</p>
           </div>
         </div>
       </div>
@@ -260,7 +260,7 @@ export function HeroSection({ onScrollDown }: HeroSectionProps) {
         className="mx-auto flex flex-col items-center gap-2 pb-4"
       >
         <span className="text-[9px] font-bold uppercase tracking-[0.3em] text-text-secondary">
-          Scroll to Explore Architecture
+          Scroll to Explore Features
         </span>
         <ChevronDown className="h-4 w-4 animate-bounce text-text-secondary" />
       </button>

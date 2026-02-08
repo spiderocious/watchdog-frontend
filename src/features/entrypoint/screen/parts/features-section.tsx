@@ -1,7 +1,7 @@
 import { useRef, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import gsap from 'gsap'
-import { Activity, BellRing, Globe, Sliders, Clock, Code } from '@icons/index.ts'
+import { Activity, BellRing, Sliders, Clock, Code } from '@icons/index.ts'
 import { ROUTES } from '@shared/constants/routes.ts'
 import type { LucideIcon } from '@icons/index.ts'
 
@@ -15,44 +15,44 @@ type FeatureCard = {
 const FEATURES: FeatureCard[] = [
   {
     icon: Activity,
-    title: 'Real-Time Monitoring',
+    title: 'Endpoint Monitoring',
     description:
-      'Millisecond latency tracking for all backend processes with zero-drift synchronization across nodes.',
+      'Monitor any HTTP/HTTPS endpoint with configurable check intervals. Track status codes and response times in real-time.',
     illustration: 'heartbeat',
   },
   {
-    icon: BellRing,
-    title: 'Instant Alerts',
-    description:
-      'Immediate notification via SMS, Email, or Webhook. Multi-channel escalation protocols built-in.',
-    illustration: 'bars',
-  },
-  {
-    icon: Globe,
-    title: 'Global Coverage',
-    description:
-      'Distributed edge nodes across 6 continents ensuring low-latency monitoring from every user region.',
-    illustration: 'dots',
-  },
-  {
-    icon: Sliders,
-    title: 'Custom Thresholds',
-    description:
-      'Define precise triggers for automated responses. Smart-scaling and auto-healing integrations.',
-    illustration: 'sliders',
-  },
-  {
     icon: Clock,
-    title: 'Incident Timeline',
+    title: 'Health Check Logs',
     description:
-      'Complete audit trail of every system fluctuation with high-fidelity log preservation for post-mortems.',
+      'Complete history of every health check with timestamps, status codes, and response times for troubleshooting.',
     illustration: 'timeline',
   },
   {
-    icon: Code,
-    title: 'Developer API',
+    icon: Activity,
+    title: 'Uptime Tracking',
     description:
-      'Seamless integration with your existing stack. Fully documented REST and GraphQL endpoints.',
+      'Track uptime percentage over time with detailed metrics showing success rates and failure counts.',
+    illustration: 'bars',
+  },
+  {
+    icon: Sliders,
+    title: 'Custom Configuration',
+    description:
+      'Configure HTTP methods, headers, request bodies, expected status codes, and failure thresholds per service.',
+    illustration: 'sliders',
+  },
+  {
+    icon: BellRing,
+    title: 'Service Diagnostics',
+    description:
+      'View recent check logs and error history in a clean dashboard. Quickly identify when and why services went down.',
+    illustration: 'dots',
+  },
+  {
+    icon: Code,
+    title: 'REST API',
+    description:
+      'Full REST API for programmatic access to create, update, pause, resume, and delete monitored services.',
     illustration: 'code',
   },
 ]
@@ -198,7 +198,7 @@ export function FeaturesSection({ isActive }: FeaturesSectionProps) {
       .from(
         el.querySelectorAll('.feature-card'),
         {
-          opacity: 0,
+          opacity: 1,
           y: 50,
           scale: 0.95,
           duration: 0.6,
@@ -209,7 +209,7 @@ export function FeaturesSection({ isActive }: FeaturesSectionProps) {
       )
       .from(
         el.querySelector('.section-cta'),
-        { opacity: 0, y: 40, duration: 0.7, ease: 'power2.out' },
+        { opacity: 0, y: 0, duration: 0.7, ease: 'power2.out' },
         '-=0.2'
       )
   }, [isActive])
@@ -222,15 +222,15 @@ export function FeaturesSection({ isActive }: FeaturesSectionProps) {
       <div className="flex w-full max-w-6xl flex-col items-center">
         {/* Header */}
         <p className="section-tag text-[10px] font-bold uppercase tracking-[0.3em] text-primary">
-          — Everything You Need —
+          — Core Features —
         </p>
         <h2 className="section-title mt-3 text-center text-3xl font-black uppercase tracking-tight text-text-white md:text-5xl lg:text-6xl">
-          Built For Reliability
+          Simple Yet Powerful
         </h2>
         <div className="section-bar mt-4 h-1 w-16 origin-center rounded-full bg-primary" />
 
         {/* Cards grid */}
-        <div className="mt-10 grid w-full grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-4 grid w-full grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 mb-8">
           {FEATURES.map((feature) => {
             const Illustration = ILLUSTRATION_MAP[feature.illustration]
             return (
@@ -261,14 +261,14 @@ export function FeaturesSection({ isActive }: FeaturesSectionProps) {
 
         {/* CTA Banner */}
         <div
-          className="section-cta mt-8 flex w-full flex-col items-center justify-between gap-5 rounded-xl border border-primary/30 bg-gradient-to-r from-primary/15 via-primary/10 to-cyan-500/15 p-6 md:flex-row md:p-8"
+          className="mt-12 flex w-full flex-col items-center justify-between gap-5 rounded-xl border border-primary/30 bg-gradient-to-r from-primary/15 via-primary/10 to-cyan-500/15 p-6 md:flex-row md:p-8"
         >
           <div>
             <h3 className="text-xl font-black uppercase tracking-tight text-text-white md:text-2xl">
               Ready To Start Monitoring?
             </h3>
             <p className="mt-1 text-xs text-text-secondary md:text-sm">
-              Deploy your first grid node in under 5 minutes. No credit card required for initial setup.
+              Add your first endpoint in seconds. No credit card required.
             </p>
           </div>
           <Link

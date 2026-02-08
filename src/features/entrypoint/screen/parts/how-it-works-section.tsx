@@ -8,17 +8,17 @@ const STEPS = [
   {
     number: '01',
     title: 'Add Your Endpoint',
-    subtitle: 'Connect your API or URL in one click.',
+    subtitle: 'Enter your URL, configure method and check interval.',
   },
   {
     number: '02',
-    title: 'We Monitor 24/7',
-    subtitle: 'Global pings every 30 seconds from 12 regions.',
+    title: 'We Check Continuously',
+    subtitle: 'Automated health checks at your chosen interval.',
   },
   {
     number: '03',
-    title: 'Get Alerted Instantly',
-    subtitle: 'Low latency notifications via your favorite stack.',
+    title: 'View Status Dashboard',
+    subtitle: 'Monitor uptime, response times, and error logs.',
   },
 ]
 
@@ -55,11 +55,11 @@ function TerminalCard() {
   )
 }
 
-function LivePulseCard() {
-  const barData = [
-    { label: 'US-EAST-1:', value: '24ms', heights: [55, 40] },
-    { label: 'EU-WEST-2:', value: '89ms', heights: [65, 80] },
-    { label: 'AP-SOUTH-1:', value: '142ms', heights: [50, 70] },
+function ServiceStatusCard() {
+  const services = [
+    { name: 'Production API', status: 'active', uptime: '99.8%' },
+    { name: 'Staging API', status: 'active', uptime: '99.2%' },
+    { name: 'Payment Service', status: 'down', uptime: '94.1%' },
   ]
 
   return (
@@ -69,28 +69,23 @@ function LivePulseCard() {
         <div className="flex items-center gap-2">
           <Activity className="h-3.5 w-3.5 text-primary" />
           <span className="text-[10px] font-bold uppercase tracking-widest text-text-white">
-            Live Pulse
+            Service Status
           </span>
         </div>
         <span className="text-[10px] font-bold uppercase tracking-wider text-primary">
-          System OK
+          3 Services
         </span>
       </div>
-      {/* Bars */}
-      <div className="mt-4 flex items-end justify-around gap-3">
-        {barData.map((region) => (
-          <div key={region.label} className="flex flex-col items-center gap-1">
-            <div className="flex items-end gap-1">
-              {region.heights.map((h, j) => (
-                <div
-                  key={j}
-                  className="w-5 rounded-sm bg-primary"
-                  style={{ height: h * 0.6, opacity: 0.4 + j * 0.3 }}
-                />
-              ))}
+      {/* Services */}
+      <div className="mt-4 space-y-2">
+        {services.map((service) => (
+          <div key={service.name} className="flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              <div className={`h-2 w-2 rounded-full ${service.status === 'active' ? 'bg-status-success' : 'bg-status-error'}`} />
+              <span className="text-[9px] text-text-white">{service.name}</span>
             </div>
-            <span className="mt-1 text-[8px] font-medium tracking-wider text-text-tertiary">
-              {region.label} {region.value}
+            <span className="text-[8px] font-medium tracking-wider text-text-tertiary">
+              {service.uptime}
             </span>
           </div>
         ))}
@@ -99,66 +94,33 @@ function LivePulseCard() {
   )
 }
 
-function AlertsCard() {
-  const alerts = [
-    {
-      icon: Bell,
-      color: 'bg-green-600',
-      app: 'Slack',
-      time: '3:14 PM',
-      channel: '#ops-alerts',
-      message: (
-        <>
-          <span className="font-bold text-status-success">INCIDENT RESOLVED</span> - Production API
-        </>
-      ),
-    },
-    {
-      icon: Mail,
-      color: 'bg-blue-600',
-      app: 'Monitor_X Notification',
-      time: '',
-      channel: '',
-      message: 'Subject: 99.9% Uptime achievement reached...',
-    },
-    {
-      icon: AlertTriangle,
-      color: 'bg-red-600',
-      app: 'PagerDuty Alert',
-      time: '',
-      channel: '',
-      message: 'Resolved: High Latency in region-us-west',
-    },
+function HealthCheckCard() {
+  const logs = [
+    { time: '14:32:01', status: 200, response: '142ms', success: true },
+    { time: '14:31:31', status: 200, response: '138ms', success: true },
+    { time: '14:31:01', status: 503, response: '—', success: false },
+    { time: '14:30:31', status: 200, response: '145ms', success: true },
   ]
 
   return (
-    <div className="space-y-2.5">
-      {alerts.map((alert, i) => (
-        <div
-          key={i}
-          className="flex items-start gap-3 rounded-lg border border-border-primary/10 bg-bg-secondary p-3"
-        >
-          <div
-            className={`flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-lg ${alert.color}`}
-          >
-            <alert.icon className="h-4 w-4 text-white" />
+    <div className="rounded-lg border border-primary/20 bg-bg-secondary p-4">
+      <div className="flex items-center gap-2">
+        <Bell className="h-3.5 w-3.5 text-primary" />
+        <span className="text-[10px] font-bold uppercase tracking-widest text-text-white">
+          Health Check Log
+        </span>
+      </div>
+      <div className="mt-3 space-y-1.5 font-mono text-[9px]">
+        {logs.map((log, i) => (
+          <div key={i} className="flex items-center justify-between">
+            <span className="text-text-tertiary">{log.time}</span>
+            <span className={log.success ? 'text-status-success' : 'text-status-error'}>
+              [{log.status}]
+            </span>
+            <span className="text-text-secondary">{log.response}</span>
           </div>
-          <div className="min-w-0">
-            <div className="flex items-center gap-2">
-              <span className="text-xs font-bold text-text-white">{alert.app}</span>
-              {alert.time && (
-                <span className="text-[10px] text-text-tertiary">{alert.time}</span>
-              )}
-            </div>
-            {alert.channel && (
-              <p className="text-[10px] text-text-tertiary">{alert.channel}</p>
-            )}
-            <p className="mt-0.5 text-[10px] leading-relaxed text-text-secondary">
-              {alert.message}
-            </p>
-          </div>
-        </div>
-      ))}
+        ))}
+      </div>
     </div>
   )
 }
@@ -232,15 +194,15 @@ export function HowItWorksSection({ isActive }: HowItWorksSectionProps) {
         {/* Header */}
         <div className="inline-block rounded border border-primary/30 bg-primary/10 px-4 py-1.5">
           <span className="hw-tag text-[10px] font-bold uppercase tracking-[0.3em] text-primary">
-            Deployment Pipeline
+            How It Works
           </span>
         </div>
         <h2 className="hw-title mt-4 text-center text-3xl font-black uppercase tracking-tight text-text-white md:text-5xl lg:text-6xl">
-          Up And Running In{' '}
-          <span className="text-primary">60 Seconds</span>
+          Start Monitoring In{' '}
+          <span className="text-primary">3 Simple Steps</span>
         </h2>
         <p className="mt-3 max-w-lg text-center text-xs text-text-secondary md:text-sm">
-          The fastest way to achieve 99.99% uptime visibility for your critical backend infrastructure.
+          Add endpoints, track uptime, and view metrics in a clean dashboard.
         </p>
 
         {/* Steps */}
@@ -269,10 +231,10 @@ export function HowItWorksSection({ isActive }: HowItWorksSectionProps) {
             <TerminalCard />
           </div>
           <div className="card-item">
-            <LivePulseCard />
+            <ServiceStatusCard />
           </div>
           <div className="card-item">
-            <AlertsCard />
+            <HealthCheckCard />
           </div>
         </div>
 
@@ -285,7 +247,7 @@ export function HowItWorksSection({ isActive }: HowItWorksSectionProps) {
             Start Monitoring Free
           </Link>
           <p className="text-[10px] font-bold uppercase tracking-widest text-text-tertiary">
-            No Credit Card Required &bull; Unlimited Seats &bull; 14-Day History
+            No Credit Card Required &bull; Free to Use &bull; Open Source
           </p>
         </div>
       </div>
