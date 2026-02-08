@@ -5,6 +5,7 @@ import { AppLayout } from '@ui/components/index.ts'
 import { entrypointRoutes } from '@features/entrypoint/entrypoint.routes.ts'
 import { authRoutes } from '@features/auth/auth.routes.ts'
 import { dashboardRoutes } from '@features/dashboard/index.ts'
+import { servicesRoutes } from '@features/services/index.ts'
 
 export const routes: RouteObject[] = [
   {
@@ -15,7 +16,7 @@ export const routes: RouteObject[] = [
       ...authRoutes,
       {
         Component: AppLayout,
-        children: [...dashboardRoutes],
+        children: [...dashboardRoutes, ...servicesRoutes],
       },
     ],
   },
