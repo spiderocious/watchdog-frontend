@@ -1,23 +1,19 @@
 import { useState } from 'react'
 import { Outlet } from 'react-router-dom'
+import { useDashboardOverview } from '@features/dashboard/api/use-dashboard-overview.ts'
 import { Sidebar } from './sidebar.tsx'
 import { TopBar } from './top-bar.tsx'
 import { StatusFooter } from './status-footer.tsx'
-import type { StatusOverview, DashboardMetadata } from '@features/dashboard/types/index.ts'
 
-type AppLayoutProps = {
-  statusOverview?: StatusOverview
-  metadata?: DashboardMetadata
-}
-
-export function AppLayout({ statusOverview, metadata }: AppLayoutProps) {
+export function AppLayout() {
   const [sidebarOpen, setSidebarOpen] = useState(false)
+  const { data } = useDashboardOverview()
 
   return (
     <div className="flex h-screen flex-col overflow-hidden bg-bg-primary">
       <TopBar
-        statusOverview={statusOverview}
-        metadata={metadata}
+        statusOverview={data?.status_overview}
+        metadata={data?.metadata}
         onMenuToggle={() => setSidebarOpen((v) => !v)}
       />
 
@@ -44,7 +40,7 @@ export function AppLayout({ statusOverview, metadata }: AppLayoutProps) {
         </main>
       </div>
 
-      <StatusFooter statusOverview={statusOverview} metadata={metadata} />
+      <StatusFooter statusOverview={data?.status_overview} metadata={data?.metadata} />
     </div>
   )
 }
