@@ -170,34 +170,33 @@ type FeaturesSectionProps = {
 
 export function FeaturesSection({ isActive }: FeaturesSectionProps) {
   const sectionRef = useRef<HTMLDivElement>(null)
-  const cardsRef = useRef<HTMLDivElement[]>([])
-  const ctaRef = useRef<HTMLDivElement>(null)
   const hasAnimated = useRef(false)
 
   useEffect(() => {
     if (!isActive || !sectionRef.current || hasAnimated.current) return
     hasAnimated.current = true
 
+    const el = sectionRef.current
     const tl = gsap.timeline()
 
-    tl.from(sectionRef.current.querySelector('.section-tag'), {
+    tl.from(el.querySelector('.section-tag'), {
       opacity: 0,
       y: 20,
       duration: 0.6,
       ease: 'power2.out',
     })
       .from(
-        sectionRef.current.querySelector('.section-title'),
+        el.querySelector('.section-title'),
         { opacity: 0, y: 30, duration: 0.7, ease: 'power2.out' },
         '-=0.3'
       )
       .from(
-        sectionRef.current.querySelector('.section-bar'),
+        el.querySelector('.section-bar'),
         { scaleX: 0, duration: 0.5, ease: 'power2.out' },
         '-=0.3'
       )
       .from(
-        cardsRef.current.filter(Boolean),
+        el.querySelectorAll('.feature-card'),
         {
           opacity: 0,
           y: 50,
@@ -209,7 +208,7 @@ export function FeaturesSection({ isActive }: FeaturesSectionProps) {
         '-=0.2'
       )
       .from(
-        ctaRef.current,
+        el.querySelector('.section-cta'),
         { opacity: 0, y: 40, duration: 0.7, ease: 'power2.out' },
         '-=0.2'
       )
@@ -232,15 +231,12 @@ export function FeaturesSection({ isActive }: FeaturesSectionProps) {
 
         {/* Cards grid */}
         <div className="mt-10 grid w-full grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
-          {FEATURES.map((feature, i) => {
+          {FEATURES.map((feature) => {
             const Illustration = ILLUSTRATION_MAP[feature.illustration]
             return (
               <div
                 key={feature.title}
-                ref={(el) => {
-                  if (el) cardsRef.current[i] = el
-                }}
-                className="group flex flex-col justify-between rounded-lg border border-primary/20 bg-primary/5 p-5 transition-all duration-300 hover:border-primary/40 hover:bg-primary/10 md:p-6"
+                className="feature-card group flex flex-col justify-between rounded-lg border border-primary/20 bg-primary/5 p-5 transition-all duration-300 hover:border-primary/40 hover:bg-primary/10 md:p-6"
               >
                 <div>
                   <div className="flex items-center gap-3">
@@ -265,8 +261,7 @@ export function FeaturesSection({ isActive }: FeaturesSectionProps) {
 
         {/* CTA Banner */}
         <div
-          ref={ctaRef}
-          className="mt-8 flex w-full flex-col items-center justify-between gap-5 rounded-xl border border-primary/30 bg-gradient-to-r from-primary/15 via-primary/10 to-cyan-500/15 p-6 md:flex-row md:p-8"
+          className="section-cta mt-8 flex w-full flex-col items-center justify-between gap-5 rounded-xl border border-primary/30 bg-gradient-to-r from-primary/15 via-primary/10 to-cyan-500/15 p-6 md:flex-row md:p-8"
         >
           <div>
             <h3 className="text-xl font-black uppercase tracking-tight text-text-white md:text-2xl">
