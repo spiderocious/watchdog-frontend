@@ -12,6 +12,12 @@ function getAuthHeaders(): Record<string, string> {
   return { Authorization: `Bearer ${token}` }
 }
 
+function handleUnauthorized(): void {
+  // Clear token and redirect to login
+  storageAdapter.remove('access_token')
+  window.location.href = '/login'
+}
+
 async function request<T>(
   method: string,
   url: string,
@@ -33,6 +39,17 @@ async function request<T>(
   }
 
   const response = await fetch(url, config)
+
+  // Handle 401 Unauthorized
+  if (response.status === 401) {
+    handleUnauthorized()
+    // Return a default error response to prevent further processing
+    return {
+      success: false,
+      message: 'Unauthorized - please login again',
+    } as ApiResponse<T>
+  }
+
   const data = (await response.json()) as ApiResponse<T>
   return data
 }

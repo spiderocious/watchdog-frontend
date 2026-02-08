@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback } from 'react'
 import { useQueryClient, useIsFetching } from '@tanstack/react-query'
-import { AlertTriangle, Menu, RefreshCw } from '@shared/icons/index.ts'
+import { AlertTriangle, Menu, RefreshCw, LogOut } from '@shared/icons/index.ts'
+import { useAuth } from '@shared/hooks/use-auth.ts'
 import type { StatusOverview, DashboardMetadata } from '@features/dashboard/types/index.ts'
 
 type TopBarProps = {
@@ -22,6 +23,7 @@ export function TopBar({ statusOverview, metadata, onMenuToggle }: TopBarProps) 
   const [now, setNow] = useState(() => new Date().toISOString())
   const queryClient = useQueryClient()
   const isFetching = useIsFetching()
+  const { logout } = useAuth()
 
   useEffect(() => {
     const interval = setInterval(() => setNow(new Date().toISOString()), 1000)
@@ -31,6 +33,10 @@ export function TopBar({ statusOverview, metadata, onMenuToggle }: TopBarProps) 
   const handleRefresh = useCallback(() => {
     queryClient.invalidateQueries()
   }, [queryClient])
+
+  const handleLogout = useCallback(() => {
+    logout()
+  }, [logout])
 
   const timestamp = metadata?.timestamp ?? now
   const alertCount = (statusOverview?.down ?? 0) + (statusOverview?.warning ?? 0)
@@ -87,6 +93,15 @@ export function TopBar({ statusOverview, metadata, onMenuToggle }: TopBarProps) 
         <span className="hidden text-[11px] font-mono text-text-secondary sm:block">
           {formatTimestamp(timestamp)}
         </span>
+
+        <button
+          type="button"
+          onClick={handleLogout}
+          className="flex h-8 w-8 items-center justify-center rounded-lg text-text-tertiary transition-colors hover:bg-bg-tertiary hover:text-status-error"
+          title="Logout"
+        >
+          <LogOut className="h-4 w-4" />
+        </button>
       </div>
     </header>
   )
