@@ -1,4 +1,7 @@
 import { Show } from 'meemaw'
+import { Link } from 'react-router-dom'
+import { Network, Plus } from '@icons/index.ts'
+import { ROUTES } from '@shared/constants/routes.ts'
 import type { ServiceOverview } from '../../types/index.ts'
 import { ServiceHealthCard } from './service-health-card.tsx'
 
@@ -16,10 +19,18 @@ export function SystemHealthMatrix({ services }: SystemHealthMatrixProps) {
       <Show
         when={services.length > 0}
         fallback={
-          <div className="flex h-40 items-center justify-center">
+          <div className="flex h-40 flex-col items-center justify-center gap-3">
+            <Network className="h-8 w-8 text-text-muted/40" />
             <span className="text-xs uppercase tracking-wider text-text-muted">
-              No services configured
+              No services monitored yet
             </span>
+            <Link
+              to={ROUTES.SERVICES.ROOT}
+              className="flex items-center gap-1.5 rounded-md border border-primary/40 bg-primary/10 px-3 py-1.5 text-[10px] font-bold uppercase tracking-wider text-primary transition-colors hover:bg-primary/20"
+            >
+              <Plus className="h-3 w-3" />
+              Add Service
+            </Link>
           </div>
         }
       >

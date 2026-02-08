@@ -1,4 +1,5 @@
 import { Show } from 'meemaw'
+import { Activity } from '@icons/index.ts'
 import type { CheckLog, ServiceOverview } from '../../types/index.ts'
 
 type ServiceDiagnosticsProps = {
@@ -35,9 +36,13 @@ export function ServiceDiagnostics({ checkLogs, services }: ServiceDiagnosticsPr
       <Show
         when={checkLogs.length > 0}
         fallback={
-          <div className="flex h-32 items-center justify-center">
+          <div className="flex h-32 flex-col items-center justify-center gap-3">
+            <Activity className="h-8 w-8 text-text-muted/40" />
             <span className="text-xs uppercase tracking-wider text-text-muted">
-              No diagnostic data
+              Awaiting health checks
+            </span>
+            <span className="max-w-[220px] text-center text-[10px] leading-relaxed tracking-wider text-text-muted/70">
+              Diagnostics will appear here once your services start running
             </span>
           </div>
         }

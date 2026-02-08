@@ -1,5 +1,6 @@
 import { Show } from 'meemaw'
-import { Loader2 } from '@icons/index.ts'
+import { useQueryClient } from '@tanstack/react-query'
+import { AlertTriangle, Loader2, RefreshCw } from '@icons/index.ts'
 import { useDashboardOverview } from '../api/use-dashboard-overview.ts'
 import { SystemHealthMatrix } from './parts/system-health-matrix.tsx'
 import { RealTimeTelemetry } from './parts/real-time-telemetry.tsx'
@@ -8,6 +9,11 @@ import { AlertConsole } from './parts/alert-console.tsx'
 
 export function DashboardScreen() {
   const { data, isLoading, isError } = useDashboardOverview()
+  const queryClient = useQueryClient()
+
+  function handleRetry() {
+    queryClient.invalidateQueries({ queryKey: ['dashboard-overview'] })
+  }
 
   return (
     <div className="flex flex-1 flex-col gap-4 overflow-y-auto p-4">
@@ -18,10 +24,19 @@ export function DashboardScreen() {
       </Show>
 
       <Show when={isError}>
-        <div className="flex flex-1 items-center justify-center">
+        <div className="flex flex-1 flex-col items-center justify-center gap-3">
+          <AlertTriangle className="h-8 w-8 text-status-error/60" />
           <span className="text-xs uppercase tracking-wider text-status-error">
             Failed to load dashboard data
           </span>
+          <button
+            type="button"
+            onClick={handleRetry}
+            className="flex items-center gap-1.5 rounded-md border border-text-tertiary/30 px-3 py-1.5 text-[10px] font-bold uppercase tracking-wider text-text-secondary transition-colors hover:border-text-tertiary hover:text-text-primary"
+          >
+            <RefreshCw className="h-3 w-3" />
+            Retry
+          </button>
         </div>
       </Show>
 
