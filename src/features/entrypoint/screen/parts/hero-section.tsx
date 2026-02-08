@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import gsap from 'gsap'
-import { ArrowRight, Play, Shield, CheckCircle, Lock, ChevronDown } from '@icons/index.ts'
+import { ArrowRight, Shield, CheckCircle, Lock, ChevronDown } from '@icons/index.ts'
 import { ROUTES } from '@shared/constants/routes.ts'
 
 const TERMINAL_LINES = [
