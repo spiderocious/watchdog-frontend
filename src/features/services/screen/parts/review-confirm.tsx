@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import { Upload, Sliders, CheckCircle } from '@icons/index.ts'
 import type { ServiceFormData } from '../../types/index.ts'
 
