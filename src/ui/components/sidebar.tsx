@@ -1,9 +1,9 @@
 import { Link, useLocation } from 'react-router-dom'
 import {
   LayoutDashboard,
-  Activity,
-  ClipboardList,
-  List,
+  // Activity,
+  // ClipboardList,
+  // List,
   Network,
   Settings,
 } from '@shared/icons/index.ts'
@@ -18,9 +18,9 @@ type NavItem = {
 
 const NAV_ITEMS: NavItem[] = [
   { icon: LayoutDashboard, path: ROUTES.DASHBOARD, label: 'Dashboard' },
-  { icon: Activity, path: '#', label: 'Activity' },
-  { icon: ClipboardList, path: '#', label: 'Reports' },
-  { icon: List, path: '#', label: 'Logs' },
+  // { icon: Activity, path: '#', label: 'Activity' },
+  // { icon: ClipboardList, path: '#', label: 'Reports' },
+  // { icon: List, path: '#', label: 'Logs' },
   { icon: Network, path: ROUTES.SERVICES.ROOT, label: 'Services' },
 ]
 
