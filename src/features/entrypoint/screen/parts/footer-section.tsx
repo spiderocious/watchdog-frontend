@@ -19,68 +19,60 @@ const FOOTER_LINKS = {
   },
 }
 
-export function FooterSection() {
+type FooterSectionProps = {
+  isActive: boolean
+}
+
+export function FooterSection({ isActive }: FooterSectionProps) {
   const sectionRef = useRef<HTMLDivElement>(null)
   const hasAnimated = useRef(false)
 
   useEffect(() => {
-    if (!sectionRef.current || hasAnimated.current) return
+    if (!isActive || !sectionRef.current || hasAnimated.current) return
+    hasAnimated.current = true
 
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting && !hasAnimated.current) {
-          hasAnimated.current = true
+    const el = sectionRef.current
+    const tl = gsap.timeline()
 
-          const tl = gsap.timeline()
+    // CTA header
+    tl.from(el.querySelector('.ft-tag'), {
+      opacity: 0,
+      y: 20,
+      duration: 0.5,
+      ease: 'power2.out',
+    })
+      .from(
+        el.querySelector('.ft-title'),
+        { opacity: 0, y: 40, scale: 0.95, duration: 0.8, ease: 'power3.out' },
+        '-=0.2'
+      )
+      .from(
+        el.querySelectorAll('.ft-btn'),
+        {
+          opacity: 0,
+          y: 30,
+          duration: 0.5,
+          stagger: 0.12,
+          ease: 'power2.out',
+        },
+        '-=0.3'
+      )
+      .from(
+        el.querySelector('.ft-notes'),
+        { opacity: 0, duration: 0.5 },
+        '-=0.2'
+      )
 
-          // CTA header
-          tl.from(sectionRef.current!.querySelector('.ft-tag'), {
-            opacity: 0,
-            y: 20,
-            duration: 0.5,
-            ease: 'power2.out',
-          })
-            .from(
-              sectionRef.current!.querySelector('.ft-title'),
-              { opacity: 0, y: 40, scale: 0.95, duration: 0.8, ease: 'power3.out' },
-              '-=0.2'
-            )
-            .from(
-              sectionRef.current!.querySelectorAll('.ft-btn'),
-              {
-                opacity: 0,
-                y: 30,
-                duration: 0.5,
-                stagger: 0.12,
-                ease: 'power2.out',
-              },
-              '-=0.3'
-            )
-            .from(
-              sectionRef.current!.querySelector('.ft-notes'),
-              { opacity: 0, duration: 0.5 },
-              '-=0.2'
-            )
-
-          // Footer columns
-          gsap.from(sectionRef.current!.querySelectorAll('.ft-col'), {
-            opacity: 0,
-            y: 30,
-            duration: 0.5,
-            stagger: 0.1,
-            ease: 'power2.out',
-            delay: 1,
-          })
-
-          observer.disconnect()
-        }
-      },
-      { threshold: 0.1 }
-    )
-
-    observer.observe(sectionRef.current)
-    return () => observer.disconnect()
-  }, [])
+    // Footer columns
+    gsap.from(el.querySelectorAll('.ft-col'), {
+      opacity: 0,
+      y: 30,
+      duration: 0.5,
+      stagger: 0.1,
+      ease: 'power2.out',
+      delay: 1,
+    })
+  }, [isActive])
 
   return (
     <section

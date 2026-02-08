@@ -133,82 +133,73 @@ function ClustersCard() {
   )
 }
 
-export function StatsSection() {
+type StatsSectionProps = {
+  isActive: boolean
+}
+
+export function StatsSection({ isActive }: StatsSectionProps) {
   const sectionRef = useRef<HTMLDivElement>(null)
   const hasAnimated = useRef(false)
 
   useEffect(() => {
-    if (!sectionRef.current || hasAnimated.current) return
+    if (!isActive || !sectionRef.current || hasAnimated.current) return
+    hasAnimated.current = true
 
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting && !hasAnimated.current) {
-          hasAnimated.current = true
+    const el = sectionRef.current
+    const tl = gsap.timeline()
 
-          const tl = gsap.timeline()
+    // Header
+    tl.from(el.querySelector('.st-badge'), {
+      opacity: 0,
+      y: 20,
+      duration: 0.5,
+      ease: 'power2.out',
+    })
+      .from(
+        el.querySelector('.st-title'),
+        { opacity: 0, y: 30, duration: 0.6, ease: 'power2.out' },
+        '-=0.2'
+      )
+      .from(
+        el.querySelector('.st-subtitle'),
+        { opacity: 0, y: 20, duration: 0.5, ease: 'power2.out' },
+        '-=0.2'
+      )
 
-          // Header
-          tl.from(sectionRef.current!.querySelector('.st-badge'), {
-            opacity: 0,
-            y: 20,
-            duration: 0.5,
-            ease: 'power2.out',
-          })
-            .from(
-              sectionRef.current!.querySelector('.st-title'),
-              { opacity: 0, y: 30, duration: 0.6, ease: 'power2.out' },
-              '-=0.2'
-            )
-            .from(
-              sectionRef.current!.querySelector('.st-subtitle'),
-              { opacity: 0, y: 20, duration: 0.5, ease: 'power2.out' },
-              '-=0.2'
-            )
-
-          // Stat counters with number animation
-          const statEls = sectionRef.current!.querySelectorAll('.st-stat')
-          tl.from(
-            statEls,
-            {
-              opacity: 0,
-              y: 50,
-              scale: 0.9,
-              duration: 0.6,
-              stagger: 0.1,
-              ease: 'back.out(1.4)',
-            },
-            '-=0.2'
-          )
-
-          // Ticker
-          tl.from(
-            sectionRef.current!.querySelector('.st-ticker'),
-            { opacity: 0, duration: 0.6 },
-            '-=0.3'
-          )
-
-          // Bottom cards
-          tl.from(
-            sectionRef.current!.querySelectorAll('.st-card'),
-            {
-              opacity: 0,
-              y: 40,
-              duration: 0.6,
-              stagger: 0.12,
-              ease: 'power2.out',
-            },
-            '-=0.3'
-          )
-
-          observer.disconnect()
-        }
+    // Stat counters
+    tl.from(
+      el.querySelectorAll('.st-stat'),
+      {
+        opacity: 0,
+        y: 50,
+        scale: 0.9,
+        duration: 0.6,
+        stagger: 0.1,
+        ease: 'back.out(1.4)',
       },
-      { threshold: 0.15 }
+      '-=0.2'
     )
 
-    observer.observe(sectionRef.current)
-    return () => observer.disconnect()
-  }, [])
+    // Ticker
+    tl.from(
+      el.querySelector('.st-ticker'),
+      { opacity: 0, duration: 0.6 },
+      '-=0.3'
+    )
+
+    // Bottom cards
+    tl.from(
+      el.querySelectorAll('.st-card'),
+      {
+        opacity: 0,
+        y: 40,
+        duration: 0.6,
+        stagger: 0.12,
+        ease: 'power2.out',
+      },
+      '-=0.3'
+    )
+  }, [isActive])
 
   const tickerText = TICKER_ITEMS.join('     ')
 

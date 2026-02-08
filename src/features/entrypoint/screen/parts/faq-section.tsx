@@ -44,7 +44,11 @@ const CATEGORIES: { label: string; value: FaqCategory }[] = [
   { label: 'Security', value: 'security' },
 ]
 
-export function FaqSection() {
+type FaqSectionProps = {
+  isActive: boolean
+}
+
+export function FaqSection({ isActive }: FaqSectionProps) {
   const sectionRef = useRef<HTMLDivElement>(null)
   const hasAnimated = useRef(false)
   const [activeCategory, setActiveCategory] = useState<FaqCategory>('all')
@@ -62,62 +66,50 @@ export function FaqSection() {
   })
 
   useEffect(() => {
-    if (!sectionRef.current || hasAnimated.current) return
+    if (!isActive || !sectionRef.current || hasAnimated.current) return
+    hasAnimated.current = true
 
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting && !hasAnimated.current) {
-          hasAnimated.current = true
+    const el = sectionRef.current
+    const tl = gsap.timeline()
 
-          const tl = gsap.timeline()
-
-          tl.from(sectionRef.current!.querySelector('.faq-badge'), {
-            opacity: 0,
-            y: 20,
-            duration: 0.5,
-            ease: 'power2.out',
-          })
-            .from(
-              sectionRef.current!.querySelector('.faq-title'),
-              { opacity: 0, y: 30, duration: 0.6, ease: 'power2.out' },
-              '-=0.2'
-            )
-            .from(
-              sectionRef.current!.querySelector('.faq-search'),
-              { opacity: 0, y: 20, duration: 0.5, ease: 'power2.out' },
-              '-=0.2'
-            )
-            .from(
-              sectionRef.current!.querySelector('.faq-tabs'),
-              { opacity: 0, y: 15, duration: 0.4, ease: 'power2.out' },
-              '-=0.2'
-            )
-            .from(
-              sectionRef.current!.querySelectorAll('.faq-item'),
-              {
-                opacity: 0,
-                y: 30,
-                duration: 0.5,
-                stagger: 0.08,
-                ease: 'power2.out',
-              },
-              '-=0.2'
-            )
-            .from(
-              sectionRef.current!.querySelector('.faq-support'),
-              { opacity: 0, y: 30, duration: 0.5, ease: 'power2.out' },
-              '-=0.2'
-            )
-
-          observer.disconnect()
-        }
-      },
-      { threshold: 0.15 }
-    )
-
-    observer.observe(sectionRef.current)
-    return () => observer.disconnect()
-  }, [])
+    tl.from(el.querySelector('.faq-badge'), {
+      opacity: 0,
+      y: 20,
+      duration: 0.5,
+      ease: 'power2.out',
+    })
+      .from(
+        el.querySelector('.faq-title'),
+        { opacity: 0, y: 30, duration: 0.6, ease: 'power2.out' },
+        '-=0.2'
+      )
+      .from(
+        el.querySelector('.faq-search'),
+        { opacity: 0, y: 20, duration: 0.5, ease: 'power2.out' },
+        '-=0.2'
+      )
+      .from(
+        el.querySelector('.faq-tabs'),
+        { opacity: 0, y: 15, duration: 0.4, ease: 'power2.out' },
+        '-=0.2'
+      )
+      .from(
+        el.querySelectorAll('.faq-item'),
+        {
+          opacity: 0,
+          y: 30,
+          duration: 0.5,
+          stagger: 0.08,
+          ease: 'power2.out',
+        },
+        '-=0.2'
+      )
+      .from(
+        el.querySelector('.faq-support'),
+        { opacity: 0, y: 30, duration: 0.5, ease: 'power2.out' },
+        '-=0.2'
+      )
+  }, [isActive])
 
   return (
     <section
