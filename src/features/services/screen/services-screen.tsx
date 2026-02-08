@@ -1,6 +1,8 @@
 import { useState, useMemo } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { Show } from 'meemaw'
 import { Loader2, Network, Plus } from '@icons/index.ts'
+import { ROUTES } from '@shared/constants/routes.ts'
 import { useServicesList } from '../api/use-services-list.ts'
 import {
   useDeleteService,
@@ -16,6 +18,7 @@ import { ServicesPagination } from './parts/services-pagination.tsx'
 const PAGE_LIMIT = 5
 
 export function ServicesScreen() {
+  const navigate = useNavigate()
   const [page, setPage] = useState(1)
   const [search, setSearch] = useState('')
   const [statusFilter, setStatusFilter] = useState<ServiceStatus | ''>('')
@@ -53,7 +56,7 @@ export function ServicesScreen() {
   }
 
   function handleAddService() {
-    // TODO: Open add service modal/drawer
+    navigate(ROUTES.SERVICES.CREATE)
   }
 
   return (
