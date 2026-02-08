@@ -58,7 +58,7 @@ export function ResponseTimeChart({ data }: ResponseTimeChartProps) {
     return data.filter((p) => new Date(p.time).getTime() >= cutoff)
   }, [data, range])
 
-  const { path, thresholdY, maxValue, minTime, maxTime, gridLines } = useMemo(() => {
+  const { path, thresholdY, minTime, maxTime, gridLines } = useMemo(() => {
     if (filtered.length === 0) {
       return { path: '', thresholdY: 0, maxValue: 200, minTime: 0, maxTime: 1, gridLines: [] }
     }
