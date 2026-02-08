@@ -2,22 +2,14 @@
 
 Real-time uptime monitoring dashboard built with React 19 and a SCADA-inspired industrial dark theme. Connects to the WatchDog backend API for service health monitoring, alerting, and diagnostics.
 
-## Tech Stack
+## Links
+- [Live Demo](https://watchdog.devferanmi.xyz/)
+- [GitHub Repository](https://github.com/spiderocious/watchdog-frontend)
 
-| Layer | Technology | Version |
-|-------|-----------|---------|
-| Framework | React | 19.2 |
-| Language | TypeScript | 5.9 (strict mode) |
-| Build | Vite | 7.x |
-| Styling | Tailwind CSS | 4.x (via `@tailwindcss/vite`) |
-| Routing | React Router | 7.x |
-| Data Fetching | TanStack Query | 5.x |
-| Icons | Lucide React | 0.563 |
-| Utilities | Meemaw | 1.x (`<Show>` conditional rendering) |
 
 ## Architecture
 
-The project follows **Feature-Sliced Design (FSD)** with strict module boundaries:
+The project uses the scalable **Feature-Sliced Design (FSD)** with strict module boundaries:
 
 ```
 src/
@@ -40,17 +32,6 @@ src/
     components/       # Layout, sidebar, topbar, dialogs
 ```
 
-### Path Aliases
-
-Configured in both `tsconfig.app.json` and `vite.config.ts`:
-
-```
-@app/*       -> src/*
-@features/*  -> src/features/*
-@shared/*    -> src/shared/*
-@ui/*        -> src/ui/*
-@icons/*     -> src/shared/icons/*
-```
 
 ## Key Patterns
 
@@ -79,51 +60,11 @@ Configured in both `tsconfig.app.json` and `vite.config.ts`:
 | `/services/:id` | Service Detail | Metrics, response time chart, health check log, incidents |
 | `/services/:id/edit` | Edit Service | Reuses create form components with prefilled data |
 
-## Getting Started
-
-### Prerequisites
-
-- Node.js 20+
-- WatchDog backend running at `http://localhost:3000` (configurable via `VITE_API_BASE_URL`)
-
-### Install and Run
-
-```bash
-npm install
-npm run dev
-```
-
-### Build
-
-```bash
-npm run build    # TypeScript check + Vite production build
-npm run preview  # Preview production build locally
-```
-
-### Environment Variables
-
-| Variable | Default | Description |
-|----------|---------|-------------|
-| `VITE_API_BASE_URL` | `http://localhost:3000` | Backend API base URL |
-
 ## Theme
 
-SCADA-inspired dark theme defined via Tailwind CSS v4's `@theme` directive in `src/index.css`:
+Dark theme defined via Tailwind CSS v4's `@theme` directive in `src/index.css`:
 
 - **Backgrounds**: `bg-primary` (#0d0d0d), `bg-secondary` (#1a1a1a), `bg-tertiary` (#242424)
 - **Accent**: `primary` (#00ff88) -- neon green used for interactive elements
 - **Status**: `status-success` (#00ff88), `status-warning` (#ffaa00), `status-error` (#ff3333), `status-info` (#00aaff)
 - **Font**: Quicksand (sans-serif)
-
-## TypeScript Configuration
-
-Strict mode enabled with additional safety:
-
-- `verbatimModuleSyntax` -- enforces explicit `type` imports
-- `noUnusedLocals` / `noUnusedParameters` -- zero dead code
-- `noFallthroughCasesInSwitch` -- exhaustive switch handling
-- `erasableSyntaxOnly` -- compatible with modern bundler stripping
-
-## Backend API
-
-The frontend connects to 15 REST endpoints. See `docs/api-doc.md` for full documentation including request/response schemas, error codes, and authentication flow.
