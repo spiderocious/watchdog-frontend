@@ -85,7 +85,7 @@ export function FooterSection({ isActive }: FooterSectionProps) {
   return (
     <section
       ref={sectionRef}
-      className="flex h-screen w-screen flex-shrink-0 flex-col items-center justify-between px-4 py-8 md:px-10 lg:px-16"
+      className="flex min-h-screen md:h-screen w-screen flex-shrink-0 flex-col items-center justify-between px-4 py-8 md:px-10 lg:px-16"
     >
       {/* CTA Area */}
       <div className="flex flex-1 flex-col items-center justify-center">

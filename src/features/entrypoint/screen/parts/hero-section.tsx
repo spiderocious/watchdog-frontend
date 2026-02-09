@@ -89,7 +89,7 @@ export function HeroSection({ onScrollDown }: HeroSectionProps) {
   return (
     <section
       ref={sectionRef}
-      className="relative flex h-screen w-full flex-col justify-between overflow-hidden px-6 pt-24 pb-8 md:px-10 lg:px-16"
+      className="relative flex min-h-screen md:h-screen w-full flex-col justify-between overflow-hidden px-6 pt-24 pb-8 md:px-10 lg:px-16"
     >
       <div className="flex flex-1 flex-col justify-center gap-6 lg:flex-row lg:items-center lg:gap-12">
         {/* Left content */}

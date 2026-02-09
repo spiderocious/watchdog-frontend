@@ -115,7 +115,7 @@ export function FaqSection({ isActive }: FaqSectionProps) {
   return (
     <section
       ref={sectionRef}
-      className="flex h-screen w-screen flex-shrink-0 flex-col items-center justify-center px-4 py-8 md:px-10 lg:px-16"
+      className="flex min-h-screen md:h-screen w-screen flex-shrink-0 flex-col items-center justify-center px-4 py-8 md:px-10 lg:px-16"
     >
       <div className="flex w-full max-w-3xl flex-col items-center">
         {/* Header */}
