@@ -13,6 +13,7 @@ import { FooterSection } from './parts/footer-section.tsx'
 const SECTION_COUNT = 7
 const WHEEL_THRESHOLD = 60
 const ANIMATION_DURATION = 0.7
+const MOBILE_BREAKPOINT = 768 // md breakpoint
 
 export function EntrypointScreen() {
   const containerRef = useRef<HTMLDivElement>(null)
@@ -21,6 +22,7 @@ export function EntrypointScreen() {
   const accumulatedDelta = useRef(0)
   const deltaResetTimer = useRef<ReturnType<typeof setTimeout>>(undefined)
   const [activeSection, setActiveSection] = useState(0)
+  const [isMobile, setIsMobile] = useState(window.innerWidth < MOBILE_BREAKPOINT)
 
   const navigateTo = useCallback((index: number) => {
     if (isAnimating.current) return
@@ -50,7 +52,27 @@ export function EntrypointScreen() {
     navigateTo(currentSection.current - 1)
   }, [navigateTo])
 
+  // Handle window resize to detect mobile/desktop
   useEffect(() => {
+    function handleResize() {
+      const mobile = window.innerWidth < MOBILE_BREAKPOINT
+      setIsMobile(mobile)
+      // Reset position on resize if switching to mobile
+      if (mobile && containerRef.current) {
+        gsap.set(containerRef.current, { y: 0 })
+        currentSection.current = 0
+        setActiveSection(0)
+      }
+    }
+
+    window.addEventListener('resize', handleResize)
+    return () => window.removeEventListener('resize', handleResize)
+  }, [])
+
+  useEffect(() => {
+    // Skip scroll snap animations on mobile
+    if (isMobile) return
+
     let touchStartY = 0
 
     function handleWheel(e: WheelEvent) {
@@ -104,21 +126,21 @@ export function EntrypointScreen() {
       window.removeEventListener('touchstart', handleTouchStart)
       window.removeEventListener('touchend', handleTouchEnd)
     }
-  }, [navigateNext, navigatePrev])
+  }, [navigateNext, navigatePrev, isMobile])
 
   return (
-    <main className="h-screen w-screen overflow-hidden bg-bg-primary">
+    <main className={isMobile ? 'h-screen w-screen overflow-y-auto bg-bg-primary' : 'h-screen w-screen overflow-hidden bg-bg-primary'}>
       <GridBackground />
-      <LandingNavbar onNavigateSection={navigateTo} />
+      <LandingNavbar onNavigateSection={isMobile ? undefined : navigateTo} />
 
       <div ref={containerRef} className="relative z-10">
-        <HeroSection onScrollDown={navigateNext} />
-        <FeaturesSection isActive={activeSection >= 1} />
-        <HowItWorksSection isActive={activeSection >= 2} />
-        <DashboardSection isActive={activeSection >= 3} />
-        <StatsSection isActive={activeSection >= 4} />
-        <FaqSection isActive={activeSection >= 5} />
-        <FooterSection isActive={activeSection >= 6} />
+        <HeroSection onScrollDown={isMobile ? undefined : navigateNext} />
+        <FeaturesSection isActive={isMobile ? true : activeSection >= 1} />
+        <HowItWorksSection isActive={isMobile ? true : activeSection >= 2} />
+        <DashboardSection isActive={isMobile ? true : activeSection >= 3} />
+        <StatsSection isActive={isMobile ? true : activeSection >= 4} />
+        <FaqSection isActive={isMobile ? true : activeSection >= 5} />
+        <FooterSection isActive={isMobile ? true : activeSection >= 6} />
       </div>
     </main>
   )
