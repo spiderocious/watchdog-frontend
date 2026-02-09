@@ -26,7 +26,7 @@ function getSeverity(entry: HealthCheckEntry): { label: string; color: string } 
 
 export function IncidentHistory({ errors }: IncidentHistoryProps) {
   return (
-    <section className="flex flex-col gap-3 rounded-lg border border-border-light bg-bg-secondary p-4">
+    <section className="flex flex-col gap-3 rounded-lg border border-border-light bg-bg-secondary p-4 max-h-125">
       <h2 className="text-xs font-bold uppercase tracking-wider text-text-primary">
         Incident History
       </h2>
